@@ -1,4 +1,4 @@
-package com.nvminh162.jobhunter.service.error;
+package com.nvminh162.jobhunter.util.error;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
