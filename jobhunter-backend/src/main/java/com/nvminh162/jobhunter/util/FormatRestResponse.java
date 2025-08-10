@@ -8,6 +8,8 @@ import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import com.nvminh162.jobhunter.domain.RestResponse;
+
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestControllerAdvice
@@ -23,8 +25,28 @@ public class FormatRestResponse implements ResponseBodyAdvice<Object> {
             ServerHttpResponse response) {
         HttpServletResponse httpServletResponse = ((ServletServerHttpResponse) response).getServletResponse();
         int status = httpServletResponse.getStatus();
-        System.out.println(status);
-        return body;
+
+        RestResponse<Object> res = new RestResponse<Object>();
+        res.setStatusCode(status);
+
+        /*
+         * *** Fix Bug: ***
+         * RestResponse can't be cast to class String
+         */
+        if (body instanceof String) {
+            return body;
+        }
+
+        // case: error
+        if (status >= 400) {
+            return body;
+        } else {
+            // case: success
+            res.setData(body);
+            res.setMessage("API Success");
+        }
+
+        return res;
     }
 
     /*
