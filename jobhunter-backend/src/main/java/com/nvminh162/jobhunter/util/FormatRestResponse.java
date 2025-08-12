@@ -51,7 +51,7 @@ public class FormatRestResponse implements ResponseBodyAdvice<Object> {
 
     /*
      * Vì sao lại return true?
-     * =>Vì tôi muốn override (format) lại phản hồi của API!
+     * => Vì tôi muốn override (format) lại phản hồi của API!
      * (?) Ngoại lệ từng controller thì hãy check if else để return false không
      * override (format) lại phản hồi của API!
      */

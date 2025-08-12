@@ -1,5 +1,7 @@
 package com.nvminh162.jobhunter.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.nvminh162.jobhunter.domain.User;
@@ -15,6 +17,10 @@ public class UserService {
 
     public User handleCreateUser(User user) {
         return userRepository.save(user);
+    }
+
+    public List<User> handleGetAllUsers() {
+        return this.userRepository.findAll();
     }
 
     public User handleGetUserByUsername(String username) {

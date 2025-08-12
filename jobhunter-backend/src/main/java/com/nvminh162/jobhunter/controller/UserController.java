@@ -1,5 +1,7 @@
 package com.nvminh162.jobhunter.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nvminh162.jobhunter.domain.User;
 import com.nvminh162.jobhunter.service.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 public class UserController {
@@ -28,4 +31,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(ericUser);
     }
 
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = this.userService.handleGetAllUsers();
+        return ResponseEntity.status(HttpStatus.OK).body(users);
+    }
 }
