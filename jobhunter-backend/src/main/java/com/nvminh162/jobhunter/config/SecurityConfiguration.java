@@ -24,6 +24,10 @@ import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.util.Base64;
 import com.nvminh162.jobhunter.util.SecurityUtil;
 
+/* NOTE
+ * Vì sao lại thêm @Bean kết hợp @Configuration:
+ * Nói với Spring rằng: tôi muốn ghi đè cấu hình mặc định
+ */
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration {
@@ -31,11 +35,20 @@ public class SecurityConfiguration {
     @Value("${nvminh162.jwt.base64-secret}")
     private String jwtKey;
 
+    /* NOTE
+     * Sử dụng thuật toán BCrypt
+     * Ghi đè cấu hình mặc định đối tượng PasswordEncoder
+     * => Mã hoá mật khẩu người dùng bằng thuật toán BCrypt =))
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /* NOTE
+     * Ghi đè cấu hình mặc định đối tượng SecurityFilterChain
+     *
+     */
     @Bean
     public SecurityFilterChain filterChain(
             HttpSecurity http,
@@ -101,8 +114,3 @@ public class SecurityConfiguration {
     }
 
 }
-
-/*
- * Vì sao lại thêm @Bean kết hợp @Configuration:
- * Nói với Spring rằng: tôi muốn ghi đè cấu hình mặc định
- */
