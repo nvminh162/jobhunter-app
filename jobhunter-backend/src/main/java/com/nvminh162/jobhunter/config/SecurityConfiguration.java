@@ -52,7 +52,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(
             HttpSecurity http,
-            AuthenticationEntryPointCustom authenticationEntryPointCustom // custom here
+            CustomAuthenticationEntryPoint customAuthenticationEntryPoint // custom here
     ) throws Exception {
         http
                 .csrf(c -> c.disable())
@@ -65,11 +65,11 @@ public class SecurityConfiguration {
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(Customizer.withDefaults())
-                        .authenticationEntryPoint(authenticationEntryPointCustom))
+                        .authenticationEntryPoint(customAuthenticationEntryPoint))
                 // default exception (Config authorization)
                 // .exceptionHandling(
                 //         exceptions -> exceptions
-                //                 .authenticationEntryPoint(authenticationEntryPointCustom) // 401
+                //                 .authenticationEntryPoint(customAuthenticationEntryPoint) // 401
                 //                 .accessDeniedHandler(new BearerTokenAccessDeniedHandler())) // 403
                 .formLogin(f -> f.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
