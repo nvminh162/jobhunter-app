@@ -18,6 +18,7 @@ import com.nvminh162.jobhunter.domain.RestResponse;
 @RestControllerAdvice // (@ControllerAdvice + @ResponseBody)
 public class GlobalException {
     @ExceptionHandler(value = {
+        IdInvalidException.class,
         UsernameNotFoundException.class,
         BadCredentialsException.class
     })

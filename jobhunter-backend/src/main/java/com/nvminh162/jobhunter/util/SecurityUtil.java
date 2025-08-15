@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SecurityUtil {
     private final JwtEncoder jwtEncoder;
+    /* Dùng thuật toán HS512 */
     public static final MacAlgorithm JWT_ALGORITHM = MacAlgorithm.HS512;
 
     @Value("${nvminh162.jwt.base64-secret}")
@@ -28,7 +29,9 @@ public class SecurityUtil {
     }
 
     public String createToken(Authentication authentication) {
+        // Lấy thời gian hiện tại
         Instant now = Instant.now();
+        // Công thêm mốc thời gian quy định
         Instant validity = now.plus(this.jwtKeyExpiration, ChronoUnit.SECONDS);
 
         // @formatter:off
@@ -36,12 +39,12 @@ public class SecurityUtil {
             .issuedAt(now)
             .expiresAt(validity)
             .subject(authentication.getName())
-            .claim("nvminh162", authentication)
+            .claim("nvminh162", authentication) // your claim name (your name)
             .build();
 
         JwsHeader jwsHeader = JwsHeader.with(JWT_ALGORITHM).build();
+        // Mã hoá từ thuật toán đã config
         return this.jwtEncoder.encode(JwtEncoderParameters.from(jwsHeader, claims)).getTokenValue();
-
     }
 
 }

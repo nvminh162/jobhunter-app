@@ -1,4 +1,4 @@
-package com.nvminh162.jobhunter.util;
+package com.nvminh162.jobhunter.config;
 
 import java.util.Collections;
 
@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 import com.nvminh162.jobhunter.service.UserService;
 
 @Component("userDetailsService")
-public class UserDetailsCustom implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserService userService;
 
-    public UserDetailsCustom(UserService userService) {
+    public CustomUserDetailsService(UserService userService) {
         this.userService = userService;
     }
 

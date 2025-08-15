@@ -24,6 +24,11 @@ import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.util.Base64;
 import com.nvminh162.jobhunter.util.SecurityUtil;
 
+/* 
+ * Docs:
+ * https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html
+ */
+
 /* NOTE
  * Vì sao lại thêm @Bean kết hợp @Configuration:
  * Nói với Spring rằng: tôi muốn ghi đè cấu hình mặc định
@@ -59,19 +64,27 @@ public class SecurityConfiguration {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         authz -> authz
+                                /* Cho phép vào trang /** từ URL */
                                 .requestMatchers("/", "/login").permitAll()
+                                /* Còn lại bất cứ request nào buộc phải xác thực */
                                 .anyRequest().authenticated()
-                             // .anyRequest().permitAll()
+                                // .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(Customizer.withDefaults())
                         .authenticationEntryPoint(customAuthenticationEntryPoint))
-                // default exception (Config authorization)
+                /*
+                 * Default exception (Config authorization)
+                 * Trường hợp này không cần vì đã có customAuthenticationEntryPoint
+                 *
+                */
                 // .exceptionHandling(
                 //         exceptions -> exceptions
                 //                 .authenticationEntryPoint(customAuthenticationEntryPoint) // 401
                 //                 .accessDeniedHandler(new BearerTokenAccessDeniedHandler())) // 403
+                /* Tắt không dùng form login mặc định của spring  */
                 .formLogin(f -> f.disable())
+                /* Enable Session: Default is stateful, nói với spring tôi dùng mô hình stateless */
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
@@ -87,7 +100,6 @@ public class SecurityConfiguration {
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
         return jwtAuthenticationConverter;
     }
-
 
     @Bean
     public JwtEncoder jwtEncoder() {
@@ -112,5 +124,4 @@ public class SecurityConfiguration {
         byte[] keyBytes = Base64.from(jwtKey).decode();
         return new SecretKeySpec(keyBytes, 0, keyBytes.length, SecurityUtil.JWT_ALGORITHM.getName());
     }
-
 }

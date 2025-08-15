@@ -17,23 +17,25 @@ import jakarta.validation.Valid;
 
 @RestController
 public class AuthController {
+
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final SecurityUtil securityUtil;
+
     public AuthController(AuthenticationManagerBuilder authenticationManagerBuilder, SecurityUtil securityUtil) {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.securityUtil = securityUtil;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<RestLoginDTO> login(@Valid @RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<RestLoginDTO> login(@Valid @RequestBody LoginDTO loginDTO) { //add @Valid to validate <add dependencies/>
         // Nap input gồm username/password vào Security
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword());
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                loginDTO.getUsername(), loginDTO.getPassword());
         // xác thực người dùng => cần viết hàm loadUserByUsername
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         // nạp thông tin (nếu xử lý thành công) vào SecurityContext
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        //create a token
+        // create a token
         String accessToken = this.securityUtil.createToken(authentication);
         RestLoginDTO restLoginDTO = new RestLoginDTO();
         restLoginDTO.setAccessToken(accessToken);

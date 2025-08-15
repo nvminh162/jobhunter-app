@@ -32,6 +32,7 @@ public class FormatRestResponse implements ResponseBodyAdvice<Object> {
         /*
          * *** Fix Bug: ***
          * RestResponse can't be cast to class String
+         * (Nếu là String thì không format)
          */
         if (body instanceof String) {
             return body;
