@@ -40,7 +40,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
                 .orElse(authException.getMessage());
         res.setError(errorMessage);
         // res.setError(authException.getCause().getMessage());
-        res.setMessage("Token không hợp lệ (hết hạn, không đúng định dạng hoặc không chính xác)");
+        res.setMessage("Token không hợp lệ, hết hạn, không đúng định dạng hoặc không chính xác...");
         mapper.writeValue(response.getWriter(), res);
     }
 
