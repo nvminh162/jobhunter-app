@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.nvminh162.jobhunter.domain.RestResponse;
 
+/* 
+ * Giải thích cơ chế Exception Y - #68 (3p)
+ */
 @RestControllerAdvice // (@ControllerAdvice + @ResponseBody)
 public class GlobalException {
     @ExceptionHandler(value = {
