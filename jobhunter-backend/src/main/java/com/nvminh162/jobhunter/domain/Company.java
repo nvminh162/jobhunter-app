@@ -2,6 +2,9 @@ package com.nvminh162.jobhunter.domain;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.nvminh162.jobhunter.util.SecurityUtil;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +35,7 @@ public class Company {
 
     private String logo;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss a", timezone = "GMT+7")
     private Instant createdAt;
     private Instant updatedAt;
     private String createdBy;
@@ -39,7 +43,9 @@ public class Company {
 
     @PrePersist
     public void handleBeforeCreate() {
-        this.createdBy = "nvminh162";
+        this.createdBy = SecurityUtil.getCurrentUserLogin().isPresent() == true
+                ? SecurityUtil.getCurrentUserLogin().get()
+                : null;
         this.createdAt = Instant.now();
     }
 }
