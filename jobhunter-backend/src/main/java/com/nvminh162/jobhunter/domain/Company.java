@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -35,8 +36,11 @@ public class Company {
 
     private String logo;
 
+    // Format for API return (Chỉ hiển thị phí API còn phía backend vẫn ISO-8601)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss a", timezone = "GMT+7")
     private Instant createdAt;
+    // Format for API return (Chỉ hiển thị phí API còn phía backend vẫn ISO-8601)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss a", timezone = "GMT+7")
     private Instant updatedAt;
     private String createdBy;
     private String updatedBy;
@@ -47,5 +51,13 @@ public class Company {
                 ? SecurityUtil.getCurrentUserLogin().get()
                 : null;
         this.createdAt = Instant.now();
+    }
+
+    @PreUpdate
+    public void handleBeforeUpdate() {
+        this.updatedBy = SecurityUtil.getCurrentUserLogin().isPresent() == true
+                ? SecurityUtil.getCurrentUserLogin().get()
+                : null;
+        this.updatedAt = Instant.now();
     }
 }
