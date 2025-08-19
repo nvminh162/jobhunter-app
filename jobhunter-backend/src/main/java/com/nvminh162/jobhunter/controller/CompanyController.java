@@ -8,7 +8,6 @@ import com.nvminh162.jobhunter.service.CompanyService;
 
 import jakarta.validation.Valid;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.PageRequest;
@@ -52,7 +51,7 @@ public class CompanyController {
     //     String strCurrent = currentOptional.isPresent() ? currentOptional.get() : "";
     //     String strPageSize = pageSizeOptional.isPresent() ? pageSizeOptional.get() : "";
     //     // Convert String to Int
-    //     int intCurrent = Integer.parseInt(strCurrent) - 1; // default lấy từ là 0, phía user thực tế là trang 1
+    //     int intCurrent = Integer.parseInt(strCurrent) - 1; // default lấy từ là 0, phía cần thực tế là 1
     //     int intPageSize = Integer.parseInt(strPageSize);
     //     Pageable pageable = PageRequest.of(intCurrent, intPageSize);
 

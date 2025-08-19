@@ -1,7 +1,6 @@
 package com.nvminh162.jobhunter.controller;
 
-import java.util.List;
-
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nvminh162.jobhunter.domain.User;
+import com.nvminh162.jobhunter.domain.dto.ResultPaginationDTO;
 import com.nvminh162.jobhunter.service.UserService;
+import com.turkraft.springfilter.boot.Filter;
+
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
@@ -32,8 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = this.userService.handleGetAllUsers();
-        return ResponseEntity.status(HttpStatus.OK).body(users);
+    public ResponseEntity<ResultPaginationDTO> getAllUsers(@Filter Specification<User> specification) {
+        return ResponseEntity.status(HttpStatus.OK).body(this.userService.handleGetAllUsers(specification));
     }
 }

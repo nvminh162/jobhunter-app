@@ -102,6 +102,12 @@
             <version>1.18.38</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.turkraft.springfilter</groupId>
+            <artifactId>jpa</artifactId>
+            <version>3.2.0</version>
+        </dependency>
     </dependencies>
 
 
