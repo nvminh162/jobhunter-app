@@ -16,6 +16,7 @@ import com.nvminh162.jobhunter.util.SecurityUtil;
 import jakarta.validation.Valid;
 
 @RestController
+// @RequestMapping("/api/v1")
 public class AuthController {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;

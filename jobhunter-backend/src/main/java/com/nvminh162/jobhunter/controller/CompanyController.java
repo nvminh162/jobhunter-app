@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nvminh162.jobhunter.domain.Company;
 import com.nvminh162.jobhunter.domain.dto.ResultPaginationDTO;
 import com.nvminh162.jobhunter.service.CompanyService;
+import com.nvminh162.jobhunter.util.annotation.ApiMessage;
 import com.turkraft.springfilter.boot.Filter;
 
 import jakarta.validation.Valid;
@@ -15,12 +16,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
+@RequestMapping("/api/${api.version}")
 public class CompanyController {
     private final CompanyService companyService;
 
@@ -78,6 +81,7 @@ public class CompanyController {
 
     /* Pagination return DTO - sorting */
     @GetMapping("/companies")
+    @ApiMessage("Fetch all companies")
     public ResponseEntity<ResultPaginationDTO> getCompanies(@Filter Specification<Company> specification, Pageable pageable) {
         return ResponseEntity.ok(this.companyService.handleGetAllCompaniesDTOWithPaginationAndSorting(specification, pageable));
     }
