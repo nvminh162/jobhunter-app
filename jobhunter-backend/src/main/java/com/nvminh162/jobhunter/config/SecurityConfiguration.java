@@ -40,6 +40,9 @@ public class SecurityConfiguration {
     @Value("${nvminh162.jwt.base64-secret}")
     private String jwtKey;
 
+    @Value("${api.version}")
+    private String apiVersion;
+
     /* NOTE
      * Sử dụng thuật toán BCrypt
      * Ghi đè cấu hình mặc định đối tượng PasswordEncoder
@@ -59,13 +62,14 @@ public class SecurityConfiguration {
             HttpSecurity http,
             CustomAuthenticationEntryPoint customAuthenticationEntryPoint // custom here
     ) throws Exception {
+        
         http
                 .csrf(c -> c.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         authz -> authz
                                 /* Cho phép vào trang /** từ URL */
-                                .requestMatchers("/", "/login").permitAll()
+                                .requestMatchers("/", "/api/"+apiVersion+"/login").permitAll()
                                 /* Còn lại bất cứ request nào buộc phải xác thực */
                                 .anyRequest().authenticated()
                                 // .anyRequest().permitAll()
