@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.nvminh162.jobhunter.domain.Company;
@@ -33,13 +34,29 @@ public class CompanyService {
      * Để convert qua List<Company>
      * findAll(Pageable pageable).getContent();
      */
-    // Trả về List chưa format theo frontend yêu cầu
+    // Trả về List chưa format theo frontend yêu cầu - Unsorting
     public List<Company> handleGetAllCompaniesListWithPagination(Pageable pageable) {
         return this.companyRespository.findAll(pageable).getContent();
     }
     // Trả về DTO đã format theo frontend yêu cầu
     public ResultPaginationDTO handleGetAllCompaniesDTOWithPagination(Pageable pageable) {
         Page<Company> companyPage = this.companyRespository.findAll(pageable);
+        ResultPaginationDTO resultPaginationDTO = new ResultPaginationDTO();
+        Meta mt = new Meta();
+        // Get from frontend send request
+        mt.setPage(pageable.getPageNumber() + 1);
+        mt.setPageSize(pageable.getPageSize());
+        // Get from dbs
+        mt.setPages(companyPage.getTotalPages());
+        mt.setTotal(companyPage.getTotalElements());
+        resultPaginationDTO.setMeta(mt);
+        resultPaginationDTO.setResult(companyPage.getContent());
+        return resultPaginationDTO;
+    }
+
+    // Trả về DTO đã format theo frontend yêu cầu - Sorting
+    public ResultPaginationDTO handleGetAllCompaniesDTOWithPaginationAndSorting(Specification<Company> specification, Pageable pageable) {
+        Page<Company> companyPage = this.companyRespository.findAll(specification, pageable);
         ResultPaginationDTO resultPaginationDTO = new ResultPaginationDTO();
         Meta mt = new Meta();
         // Get from frontend send request

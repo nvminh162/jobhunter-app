@@ -5,18 +5,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nvminh162.jobhunter.domain.Company;
 import com.nvminh162.jobhunter.domain.dto.ResultPaginationDTO;
 import com.nvminh162.jobhunter.service.CompanyService;
+import com.turkraft.springfilter.boot.Filter;
 
 import jakarta.validation.Valid;
 
-import java.util.Optional;
-
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,22 +58,28 @@ public class CompanyController {
     //     return ResponseEntity.ok(companies);
     // }
 
-    /* Pagination return DTO */
-    @GetMapping("/companies")
-    public ResponseEntity<ResultPaginationDTO> getCompanies(
-            @RequestParam("current") Optional<String> currentOptional,
-            @RequestParam("pageSize") Optional<String> pageSizeOptional) {
-        // String
-        String strCurrent = currentOptional.isPresent() ? currentOptional.get() : "";
-        String strPageSize = pageSizeOptional.isPresent() ? pageSizeOptional.get() : "";
-        // Convert String to Int
-        int intCurrent = Integer.parseInt(strCurrent) - 1; // default lấy từ là 0, phía user thực tế là trang 1
-        int intPageSize = Integer.parseInt(strPageSize);
-        Pageable pageable = PageRequest.of(intCurrent, intPageSize);
+    /* Pagination return DTO - Unsorting */
+    // @GetMapping("/companies")
+    // public ResponseEntity<ResultPaginationDTO> getCompanies(
+    //         @RequestParam("current") Optional<String> currentOptional,
+    //         @RequestParam("pageSize") Optional<String> pageSizeOptional) {
+    //     // String
+    //     String strCurrent = currentOptional.isPresent() ? currentOptional.get() : "";
+    //     String strPageSize = pageSizeOptional.isPresent() ? pageSizeOptional.get() : "";
+    //     // Convert String to Int
+    //     int intCurrent = Integer.parseInt(strCurrent) - 1; // default lấy từ là 0, phía user thực tế là trang 1
+    //     int intPageSize = Integer.parseInt(strPageSize);
+    //     Pageable pageable = PageRequest.of(intCurrent, intPageSize);
 
-        /* Trả về DTO đã format theo frontend yêu cầu */
-        ResultPaginationDTO companies = this.companyService.handleGetAllCompaniesDTOWithPagination(pageable);
-        return ResponseEntity.ok(companies);
+    //     /* Trả về DTO đã format theo frontend yêu cầu */
+    //     ResultPaginationDTO companies = this.companyService.handleGetAllCompaniesDTOWithPagination(pageable);
+    //     return ResponseEntity.ok(companies);
+    // }
+
+    /* Pagination return DTO - sorting */
+    @GetMapping("/companies")
+    public ResponseEntity<ResultPaginationDTO> getCompanies(@Filter Specification<Company> specification, Pageable pageable) {
+        return ResponseEntity.ok(this.companyService.handleGetAllCompaniesDTOWithPaginationAndSorting(specification, pageable));
     }
 
     @PutMapping("/companies")
