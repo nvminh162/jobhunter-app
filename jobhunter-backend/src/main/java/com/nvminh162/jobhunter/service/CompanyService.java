@@ -40,15 +40,17 @@ public class CompanyService {
     // Trả về DTO đã format theo frontend yêu cầu
     public ResultPaginationDTO handleGetAllCompaniesDTOWithPagination(Pageable pageable) {
         Page<Company> companyPage = this.companyRespository.findAll(pageable);
-        ResultPaginationDTO rpd = new ResultPaginationDTO();
+        ResultPaginationDTO resultPaginationDTO = new ResultPaginationDTO();
         Meta mt = new Meta();
-        mt.setPage(companyPage.getNumber() + 1);
-        mt.setPageSize(companyPage.getSize());
+        // Get from frontend send request
+        mt.setPage(pageable.getPageNumber() + 1);
+        mt.setPageSize(pageable.getPageSize());
+        // Get from dbs
         mt.setPages(companyPage.getTotalPages());
         mt.setTotal(companyPage.getTotalElements());
-        rpd.setMeta(mt);
-        rpd.setResult(companyPage.getContent());
-        return rpd;
+        resultPaginationDTO.setMeta(mt);
+        resultPaginationDTO.setResult(companyPage.getContent());
+        return resultPaginationDTO;
     }
 
     public Company handleUpdateCompany(Company company) {
