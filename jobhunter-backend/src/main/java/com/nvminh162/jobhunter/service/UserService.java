@@ -1,7 +1,7 @@
 package com.nvminh162.jobhunter.service;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -22,17 +22,17 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public ResultPaginationDTO handleGetAllUsers(Specification<User> specification) {
-        List<User> pageUser = this.userRepository.findAll(specification);
-        ResultPaginationDTO rpd = new ResultPaginationDTO();
+    public ResultPaginationDTO handleGetAllUsers(Specification<User> specification, Pageable pageable) {
+        Page<User> pageUser = this.userRepository.findAll(specification, pageable);
+        ResultPaginationDTO resultPaginationDTO = new ResultPaginationDTO();
         Meta mt = new Meta();
-        // mt.setPage(pageUser.getNumber() + 1);
-        // mt.setPageSize(pageUser.getSize());
-        // mt.setPages(pageUser.getTotalPages());
-        // mt.setTotal(pageUser.getTotalElements());
-        rpd.setMeta(mt);
-        rpd.setResult(pageUser);
-        return rpd;
+        mt.setPage(pageUser.getNumber() + 1);
+        mt.setPageSize(pageUser.getSize());
+        mt.setPages(pageUser.getTotalPages());
+        mt.setTotal(pageUser.getTotalElements());
+        resultPaginationDTO.setMeta(mt);
+        resultPaginationDTO.setResult(pageUser.getContent());
+        return resultPaginationDTO;
     }
 
     public User handleGetUserByUsername(String username) {
