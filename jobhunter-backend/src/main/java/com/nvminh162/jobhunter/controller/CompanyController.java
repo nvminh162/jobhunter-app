@@ -32,6 +32,7 @@ public class CompanyController {
     }
 
     @PostMapping("/companies") // <?> = any
+    @ApiMessage("Create a new company")
     public ResponseEntity<?> createCompany(@Valid @RequestBody Company reqCompany) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.companyService.handleCreateCompany(reqCompany));
     }
@@ -87,12 +88,14 @@ public class CompanyController {
     }
 
     @PutMapping("/companies")
+    @ApiMessage("Update a company")
     public ResponseEntity<Company> updateCompany(@Valid @RequestBody Company reqCompany) {
         Company updatedCompany = this.companyService.handleUpdateCompany(reqCompany);
         return ResponseEntity.ok(updatedCompany);
     }
 
     @DeleteMapping("/companies/{id}")
+    @ApiMessage("Delete a new company")
     public ResponseEntity<Void> deleteCompany(@PathVariable("id") Long id) {
         this.companyService.handleDeleteCompany(id);
         return ResponseEntity.ok(null);

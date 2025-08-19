@@ -12,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import com.nvminh162.jobhunter.domain.RestResponse;
 
@@ -20,12 +21,13 @@ import com.nvminh162.jobhunter.domain.RestResponse;
  */
 @RestControllerAdvice // (@ControllerAdvice + @ResponseBody)
 public class GlobalException {
+    //
     @ExceptionHandler(value = {
-        IdInvalidException.class,
-        UsernameNotFoundException.class,
-        BadCredentialsException.class
+            UsernameNotFoundException.class,
+            BadCredentialsException.class,
+            IdInvalidException.class
     })
-    public ResponseEntity<RestResponse<Object>> handleException(Exception ex) {
+    public ResponseEntity<RestResponse<Object>> handleIdException(Exception ex) {
         RestResponse<Object> res = new RestResponse<Object>();
         res.setStatusCode(HttpStatus.BAD_REQUEST.value());
         res.setError(ex.getMessage());
@@ -33,6 +35,19 @@ public class GlobalException {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
     }
 
+    // 404
+    @ExceptionHandler(value = {
+            NoResourceFoundException.class
+    })
+    public ResponseEntity<RestResponse<Object>> handleNotFoundException(Exception ex) {
+        RestResponse<Object> res = new RestResponse<Object>();
+        res.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        res.setError(ex.getMessage());
+        res.setMessage("404 Not found. URL may not exist...");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
+    }
+
+    // Exception for validation
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<RestResponse<Object>> validationError(MethodArgumentNotValidException ex) {
         BindingResult result = ex.getBindingResult();

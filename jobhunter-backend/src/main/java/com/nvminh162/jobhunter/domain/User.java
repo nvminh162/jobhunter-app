@@ -2,6 +2,8 @@ package com.nvminh162.jobhunter.domain;
 
 import java.time.Instant;
 
+import com.nvminh162.jobhunter.util.SecurityUtil;
+// import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nvminh162.jobhunter.util.enumerate.GenderEnum;
 
 import jakarta.persistence.Entity;
@@ -10,7 +12,10 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,8 +28,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @NotBlank(message = "Email không được để trống")
     private String email;
+
+    @NotBlank(message = "Password không được để trống")
+    // @JsonIgnore //no recommend
     private String password;
+
     private int age;
 
     @Enumerated(EnumType.STRING)
@@ -32,8 +43,24 @@ public class User {
 
     private String address;
     private String refreshToken;
-    private Instant createAt;
-    private Instant updateAt;
-    private String createBy;
-    private String updateBy;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private String createdBy;
+    private String updatedBy;
+
+    @PrePersist
+    public void handleBeforeCreate() {
+        this.createdBy = SecurityUtil.getCurrentUserLogin().isPresent() == true
+                ? SecurityUtil.getCurrentUserLogin().get()
+                : null;
+        this.createdAt = Instant.now();
+    }
+
+    @PreUpdate
+    public void handleBeforeUpdate() {
+        this.updatedBy = SecurityUtil.getCurrentUserLogin().isPresent() == true
+                ? SecurityUtil.getCurrentUserLogin().get()
+                : null;
+        this.updatedAt = Instant.now();
+    }
 }

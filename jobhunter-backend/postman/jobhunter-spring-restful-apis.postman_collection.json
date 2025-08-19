@@ -24,13 +24,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/login",
+							"raw": "http://localhost:8080/api/v1/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"api",
+								"v1",
 								"login"
 							]
 						}
@@ -43,7 +45,7 @@
 			"name": "module user",
 			"item": [
 				{
-					"name": "create",
+					"name": "create a user",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -59,7 +61,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"nvminh162\",\r\n    \"email\": \"nvminh162@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"name\": \"nvminh162\",\r\n    \"email\": \"nvminh162@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"age\": 21,\r\n    \"gender\": \"MALE\",\r\n    \"address\": \"TP.HCM\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -83,7 +85,7 @@
 					"response": []
 				},
 				{
-					"name": "get all",
+					"name": "get all users",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -138,6 +140,121 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "delete a user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibnZtaW5oMTYyIjp7InByaW5jaXBhbCI6eyJwYXNzd29yZCI6bnVsbCwidXNlcm5hbWUiOiJudm1pbmgxNjJAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImFjY291bnROb25FeHBpcmVkIjp0cnVlLCJhY2NvdW50Tm9uTG9ja2VkIjp0cnVlLCJjcmVkZW50aWFsc05vbkV4cGlyZWQiOnRydWUsImVuYWJsZWQiOnRydWV9LCJjcmVkZW50aWFscyI6bnVsbCwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImRldGFpbHMiOm51bGwsImF1dGhlbnRpY2F0ZWQiOnRydWV9LCJleHAiOjE3NjQwNjY5MzUsImlhdCI6MTc1NTQyNjkzNX0.VfTu_zlQJr37CFYNw8EqkV6yHwl4v4T1AJjNplkjokNTmrhtsyN_pIYjKUxVTca9-6rLzdoJdZOgZWFeQFdF3A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"nvminh162\",\r\n    \"email\": \"nvminh162@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"age\": 21,\r\n    \"gender\": \"MALE\",\r\n    \"address\": \"TP.HCM\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibnZtaW5oMTYyIjp7InByaW5jaXBhbCI6eyJwYXNzd29yZCI6bnVsbCwidXNlcm5hbWUiOiJudm1pbmgxNjJAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImFjY291bnROb25FeHBpcmVkIjp0cnVlLCJhY2NvdW50Tm9uTG9ja2VkIjp0cnVlLCJjcmVkZW50aWFsc05vbkV4cGlyZWQiOnRydWUsImVuYWJsZWQiOnRydWV9LCJjcmVkZW50aWFscyI6bnVsbCwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImRldGFpbHMiOm51bGwsImF1dGhlbnRpY2F0ZWQiOnRydWV9LCJleHAiOjE3NjQwNjY5MzUsImlhdCI6MTc1NTQyNjkzNX0.VfTu_zlQJr37CFYNw8EqkV6yHwl4v4T1AJjNplkjokNTmrhtsyN_pIYjKUxVTca9-6rLzdoJdZOgZWFeQFdF3A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"nvminh162\",\r\n    \"email\": \"nvminh162@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"age\": 21,\r\n    \"gender\": \"MALE\",\r\n    \"address\": \"TP.HCM\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update a user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibnZtaW5oMTYyIjp7InByaW5jaXBhbCI6eyJwYXNzd29yZCI6bnVsbCwidXNlcm5hbWUiOiJudm1pbmgxNjJAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImFjY291bnROb25FeHBpcmVkIjp0cnVlLCJhY2NvdW50Tm9uTG9ja2VkIjp0cnVlLCJjcmVkZW50aWFsc05vbkV4cGlyZWQiOnRydWUsImVuYWJsZWQiOnRydWV9LCJjcmVkZW50aWFscyI6bnVsbCwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImRldGFpbHMiOm51bGwsImF1dGhlbnRpY2F0ZWQiOnRydWV9LCJleHAiOjE3NjQyNjg2MzcsImlhdCI6MTc1NTYyODYzN30.Svc-FNh-asrpBDjz9m8CFQuWd9Qj1htt_JkWfRtZo5AQG4bFscEn_HkaoLWUsyt3lHQC1pB8Vv4yBe_lWuC5qQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"name\": \"nvminh1622\",\r\n    \"gender\": \"MALE\",\r\n    \"age\": 22,\r\n    \"address\": \"Go Vap, TP.HCM\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -185,7 +302,7 @@
 					"response": []
 				},
 				{
-					"name": "get company",
+					"name": "get companies",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -259,11 +376,11 @@
 								}
 							]
 						},
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"Test Company\",\r\n    \"description\": \"Software Seller\",\r\n    \"address\": \"TP HCM\",\r\n    \"logo\": \"nvminh162.png\"\r\n}",
+							"raw": "{\r\n    \"id\": 5,\r\n    \"name\": \"Minh Company\",\r\n    \"description\": \"Production company\",\r\n    \"address\": \"TP.HCM\",\r\n    \"logo\": \"nvminh.png\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
