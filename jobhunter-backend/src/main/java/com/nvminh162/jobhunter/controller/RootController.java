@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/${api.version}")
-public class HelloController {
-
+public class RootController {
     @GetMapping("/")
     public String getHelloWorld() {
         return "Hello World, API from nvminh162!";

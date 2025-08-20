@@ -69,7 +69,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                         authz -> authz
                                 /* Cho phép vào trang /** từ URL */
-                                .requestMatchers("/", "/api/"+apiVersion+"/login").permitAll()
+                                .requestMatchers("/api/"+apiVersion, "/api/"+apiVersion+"/", "/api/"+apiVersion+"/login").permitAll()
                                 /* Còn lại bất cứ request nào buộc phải xác thực */
                                 .anyRequest().authenticated()
                                 // .anyRequest().permitAll()
