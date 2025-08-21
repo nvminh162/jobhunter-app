@@ -44,7 +44,7 @@ public class AuthController {
         // nạp thông tin (nếu xử lý thành công) vào SecurityContext
         SecurityContextHolder.getContext().setAuthentication(authentication);
         // create a token
-        String accessToken = this.securityUtil.createToken(authentication);
+        String accessToken = this.securityUtil.createAccessToken(authentication);
 
         ResLoginDTO resLoginDTO = new ResLoginDTO();
         User currentUserDB = this.userService.handleGetUserByUsername(loginDTO.getUsername());
@@ -56,6 +56,9 @@ public class AuthController {
         }
 
         resLoginDTO.setAccessToken(accessToken);
+
+        // create refresh token
+        String refreshToken = this.securityUtil.createRefreshToken(loginDTO.getUsername(), resLoginDTO);
 
         return ResponseEntity.ok().body(resLoginDTO);
     }
