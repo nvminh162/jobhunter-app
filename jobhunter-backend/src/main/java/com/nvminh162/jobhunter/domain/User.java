@@ -6,6 +6,7 @@ import com.nvminh162.jobhunter.util.SecurityUtil;
 // import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nvminh162.jobhunter.util.enumerate.GenderEnum;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -42,7 +43,10 @@ public class User {
     private GenderEnum gender;
 
     private String address;
+
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String refreshToken;
+    
     private Instant createdAt;
     private Instant updatedAt;
     private String createdBy;

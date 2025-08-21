@@ -1,5 +1,8 @@
 package com.nvminh162.jobhunter.controller;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,6 +24,9 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/${api.version}")
 public class AuthController {
+
+    @Value("${nvminh162.jwt.refresh-token-validity-in-seconds}")
+    private long refreshTokenExpiration;
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final SecurityUtil securityUtil;
@@ -60,6 +66,26 @@ public class AuthController {
         // create refresh token
         String refreshToken = this.securityUtil.createRefreshToken(loginDTO.getUsername(), resLoginDTO);
 
-        return ResponseEntity.ok().body(resLoginDTO);
+        //Update User Token
+        this.userService.updateUserToken(refreshToken, loginDTO.getUsername());
+
+        //Set Cookies
+        ResponseCookie responseCookie = ResponseCookie
+            .from("refresh_token", refreshToken)
+            // Cho phép cookie chỉ cho server sử dụng
+            .httpOnly(true)
+            .secure(true)
+            // Cookie sử dụng được trong tắt cả dự án chứ không phải /api/${api.version}
+            .path("/")
+            // Cookie sau bao lâu thì hết hạn, hết hạn tự xoá khỏi cookie browser
+            .maxAge(refreshTokenExpiration)
+            // Khi nào gửi cookie này? Nếu không định nghĩa thì web nào cũng gửi cookie
+            // .domain("example.com")
+            .build();
+
+        return ResponseEntity
+            .ok()
+            .header(HttpHeaders.SET_COOKIE, responseCookie.toString())
+            .body(resLoginDTO);
     }
 }
