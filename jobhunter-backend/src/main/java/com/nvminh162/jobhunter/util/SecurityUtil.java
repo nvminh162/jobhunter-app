@@ -38,7 +38,7 @@ public class SecurityUtil {
         this.jwtEncoder = jwtEncoder;
     }
 
-    public String createAccessToken(Authentication authentication) {
+    public String createAccessToken(Authentication authentication, ResLoginDTO.UserLogin dto) {
         // Lấy thời gian hiện tại
         Instant now = Instant.now();
         // Công thêm mốc thời gian quy định
@@ -49,7 +49,7 @@ public class SecurityUtil {
             .issuedAt(now)
             .expiresAt(validity)
             .subject(authentication.getName())
-            .claim("nvminh162", authentication)
+            .claim("user", dto)
             .build();
 
         JwsHeader jwsHeader = JwsHeader.with(JWT_ALGORITHM).build();

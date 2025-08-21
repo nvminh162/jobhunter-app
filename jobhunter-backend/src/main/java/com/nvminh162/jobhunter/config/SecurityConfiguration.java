@@ -69,7 +69,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                         authz -> authz
                                 /* Cho phép vào trang /** từ URL */
-                                .requestMatchers("/api/"+apiVersion, "/api/"+apiVersion+"/", "/api/"+apiVersion+"/login").permitAll()
+                                .requestMatchers("/api/"+apiVersion, "/api/"+apiVersion+"/", "/api/"+apiVersion+"/auth/login").permitAll()
                                 /* Còn lại bất cứ request nào buộc phải xác thực */
                                 .anyRequest().authenticated()
                                 // .anyRequest().permitAll()
@@ -98,7 +98,7 @@ public class SecurityConfiguration {
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
         grantedAuthoritiesConverter.setAuthorityPrefix("");
-        grantedAuthoritiesConverter.setAuthoritiesClaimName("nvminh162");
+        grantedAuthoritiesConverter.setAuthoritiesClaimName("user");
 
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
