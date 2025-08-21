@@ -8,6 +8,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,8 +44,7 @@ public class AuthController {
     }
 
     @PostMapping("/auth/login")
-    public ResponseEntity<ResLoginDTO> login(@Valid @RequestBody LoginDTO loginDTO) { // add @Valid to validate <add
-                                                                                      // dependencies/>
+    public ResponseEntity<ResLoginDTO> login(@Valid @RequestBody LoginDTO loginDTO) { // add @Valid to validate <add dependencies/>
         // Nap input gồm username/password vào Security
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 loginDTO.getUsername(), loginDTO.getPassword());
@@ -108,5 +109,17 @@ public class AuthController {
             userLogin.setName(currentUserDB.getName());
         }
         return ResponseEntity.ok().body(userLogin);
+    }
+
+    @GetMapping("/auth/refresh")
+    @ApiMessage("Get User by refresh token")
+    public ResponseEntity<String> getRefreshToken(
+        @CookieValue(name = "refresh_token") String refreshToken
+    ) {
+        // check valid token
+        Jwt decodedToken = this.securityUtil.checkValidRefreshToken(refreshToken);
+        // Lấy ra email từ subject
+        String email = decodedToken.getSubject();
+        return ResponseEntity.ok().body(email);
     }
 }

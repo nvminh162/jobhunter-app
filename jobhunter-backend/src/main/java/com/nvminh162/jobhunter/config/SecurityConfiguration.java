@@ -62,14 +62,18 @@ public class SecurityConfiguration {
             HttpSecurity http,
             CustomAuthenticationEntryPoint customAuthenticationEntryPoint // custom here
     ) throws Exception {
-        
         http
                 .csrf(c -> c.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         authz -> authz
                                 /* Cho phép vào trang /** từ URL */
-                                .requestMatchers("/api/"+apiVersion, "/api/"+apiVersion+"/", "/api/"+apiVersion+"/auth/login").permitAll()
+                                .requestMatchers(
+                                    "/",
+                                    "/api/"+apiVersion+"/",
+                                    "/api/"+apiVersion+"/auth/login",
+                                    "/api/"+apiVersion+"/auth/refresh"
+                                ).permitAll()
                                 /* Còn lại bất cứ request nào buộc phải xác thực */
                                 .anyRequest().authenticated()
                                 // .anyRequest().permitAll()
