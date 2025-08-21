@@ -94,11 +94,18 @@ public class SecurityConfiguration {
     }
 
     //khi decode thành công
+    /*
+     * Default spring không chạy qua phần code này
+     * Do ta nói với spring đưa token (VD chứa "permission")
+     * Nạp vào authentication
+     */
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
         grantedAuthoritiesConverter.setAuthorityPrefix("");
-        grantedAuthoritiesConverter.setAuthoritiesClaimName("user");
+        //(nạp "permission" chạy vào hàm convert của spring)
+        // set Authorities để có thể dùng hasAuthorities()
+        grantedAuthoritiesConverter.setAuthoritiesClaimName("permission");
 
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);

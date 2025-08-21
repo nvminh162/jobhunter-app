@@ -47,9 +47,11 @@ public class AuthController {
         // Nap input gồm username/password vào Security
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 loginDTO.getUsername(), loginDTO.getPassword());
+
         // xác thực người dùng => cần viết hàm loadUserByUsername
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        // nạp thông tin (nếu xử lý thành công) vào SecurityContext
+
+        // Set thông tin người dùng đăng nhập vào context (Có thể sử dụng sau này)
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         ResLoginDTO resLoginDTO = new ResLoginDTO();
