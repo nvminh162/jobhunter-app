@@ -45,7 +45,7 @@ public class SecurityUtil {
         this.jwtEncoder = jwtEncoder;
     }
 
-    public String createAccessToken(Authentication authentication, ResLoginDTO.UserLogin dto) {
+    public String createAccessToken(String email, ResLoginDTO.UserLogin dto) {
         // Lấy thời gian hiện tại
         Instant now = Instant.now();
         // Công thêm mốc thời gian quy định
@@ -61,7 +61,7 @@ public class SecurityUtil {
         JwtClaimsSet claims = JwtClaimsSet.builder()
             .issuedAt(now)
             .expiresAt(validity)
-            .subject(authentication.getName())
+            .subject(email)
             .claim("user", dto)
             .claim("permission", listAuthority)
             .build();

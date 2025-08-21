@@ -22,6 +22,7 @@ import com.nvminh162.jobhunter.domain.dto.ResLoginDTO;
 import com.nvminh162.jobhunter.service.UserService;
 import com.nvminh162.jobhunter.util.SecurityUtil;
 import com.nvminh162.jobhunter.util.annotation.ApiMessage;
+import com.nvminh162.jobhunter.util.error.IdInvalidException;
 
 import jakarta.validation.Valid;
 
@@ -64,12 +65,15 @@ public class AuthController {
             resLoginDTO.setUser(userLogin);
         }
 
-        // create a token
-        String accessToken = this.securityUtil.createAccessToken(authentication, resLoginDTO.getUser());
+        // ********************************************************
+        // Có thể tách logic này riêng để tái sử dụng
+        // create a token (authentication.getName() => lấy ra email từ authentication)
+        String accessToken = this.securityUtil.createAccessToken(authentication.getName(), resLoginDTO.getUser());
         resLoginDTO.setAccessToken(accessToken);
 
         // create refresh token
         String refreshToken = this.securityUtil.createRefreshToken(loginDTO.getUsername(), resLoginDTO);
+        // ********************************************************
 
         // Update User Token
         this.userService.updateUserToken(refreshToken, loginDTO.getUsername());
@@ -113,13 +117,67 @@ public class AuthController {
 
     @GetMapping("/auth/refresh")
     @ApiMessage("Get User by refresh token")
-    public ResponseEntity<String> getRefreshToken(
-        @CookieValue(name = "refresh_token") String refreshToken
-    ) {
+    public ResponseEntity<ResLoginDTO> getRefreshToken(
+        @CookieValue(name = "refresh_token", defaultValue = "cookie_not_exist") String refreshToken
+    ) throws IdInvalidException {
+        //handle exception if refresh token not exist
+        if(refreshToken.equals("cookie_not_exist")) {
+            throw new IdInvalidException("Bạn chưa có refresh token ở Cookies");
+        }
+
         // check valid token
         Jwt decodedToken = this.securityUtil.checkValidRefreshToken(refreshToken);
-        // Lấy ra email từ subject
+
+        // Lấy ra email từ subject của cookies khi login từ Refresh token
         String email = decodedToken.getSubject();
-        return ResponseEntity.ok().body(email);
+
+        // Check user by token + email in dbs
+        User currentUser = this.userService.getUserByRefreshTokenAndEmail(refreshToken, email);
+        if(currentUser == null) {
+            throw new IdInvalidException("Refresh token không hợp lệ!");
+        }
+        // issue new token/ set refresh token as cookies
+        // ng dùng đã tồn tại, tạo mới token và set refresh token giống cookies
+        /* Phần dưới giống logic Login - có thể refactor tái sử dụng */
+        ResLoginDTO resLoginDTO = new ResLoginDTO();
+        User currentUserDB = this.userService.handleGetUserByUsername(email);
+
+        if (currentUserDB != null) {
+            ResLoginDTO.UserLogin userLogin = new ResLoginDTO.UserLogin(currentUserDB.getId(), currentUserDB.getEmail(),
+                    currentUserDB.getName());
+            resLoginDTO.setUser(userLogin);
+        }
+
+        // ********************************************************
+        // Có thể tách logic này riêng để tái sử dụng
+        // create a token
+        String accessToken = this.securityUtil.createAccessToken(email, resLoginDTO.getUser());
+        resLoginDTO.setAccessToken(accessToken);
+
+        // create refresh token
+        String newRefreshToken = this.securityUtil.createRefreshToken(email, resLoginDTO);
+        // ********************************************************
+
+        // Update User Token
+        this.userService.updateUserToken(newRefreshToken, email);
+
+        // Set Cookies
+        ResponseCookie responseCookie = ResponseCookie
+                .from("refresh_token", newRefreshToken)
+                // Cho phép cookie chỉ cho server sử dụng
+                .httpOnly(true)
+                .secure(true)
+                // Cookie sử dụng được trong tắt cả dự án chứ không phải /api/${api.version}
+                .path("/")
+                // Cookie sau bao lâu thì hết hạn, hết hạn tự xoá khỏi cookie browser
+                .maxAge(refreshTokenExpiration)
+                // Khi nào gửi cookie này? Nếu không định nghĩa thì web nào cũng gửi cookie
+                // .domain("example.com")
+                .build();
+
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.SET_COOKIE, responseCookie.toString())
+                .body(resLoginDTO);
     }
 }
