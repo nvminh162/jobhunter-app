@@ -2,9 +2,8 @@ package com.nvminh162.jobhunter.domain;
 
 import java.time.Instant;
 
+import com.nvminh162.jobhunter.domain.enumerate.GenderEnum;
 import com.nvminh162.jobhunter.util.SecurityUtil;
-// import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.nvminh162.jobhunter.util.enumerate.GenderEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

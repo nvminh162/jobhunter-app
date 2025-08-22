@@ -17,7 +17,7 @@ import com.nvminh162.jobhunter.domain.User;
 import com.nvminh162.jobhunter.domain.dto.ResCreateUserDTO;
 import com.nvminh162.jobhunter.domain.dto.ResUpdateUserDTO;
 import com.nvminh162.jobhunter.domain.dto.ResUserDTO;
-import com.nvminh162.jobhunter.domain.dto.ResultPaginationDTO;
+import com.nvminh162.jobhunter.domain.dto.ResResultPaginationDTO;
 import com.nvminh162.jobhunter.service.UserService;
 import com.nvminh162.jobhunter.util.annotation.ApiMessage;
 import com.nvminh162.jobhunter.util.error.IdInvalidException;
@@ -55,7 +55,7 @@ public class UserController {
 
     @GetMapping("/users")
     @ApiMessage("Fetch all users")
-    public ResponseEntity<ResultPaginationDTO> getAllUsers(@Filter Specification<User> specification, Pageable pageable) {
+    public ResponseEntity<ResResultPaginationDTO> getAllUsers(@Filter Specification<User> specification, Pageable pageable) {
         return ResponseEntity.status(HttpStatus.OK).body(this.userService.handleGetAllUsers(specification, pageable));
     }
 

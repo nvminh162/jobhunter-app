@@ -2,7 +2,6 @@ package com.nvminh162.jobhunter.domain;
 
 import java.time.Instant;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.nvminh162.jobhunter.util.SecurityUtil;
 
 import jakarta.persistence.Column;

@@ -2,7 +2,7 @@ package com.nvminh162.jobhunter.domain.dto;
 
 import java.time.Instant;
 
-import com.nvminh162.jobhunter.util.enumerate.GenderEnum;
+import com.nvminh162.jobhunter.domain.enumerate.GenderEnum;
 
 import lombok.Getter;
 import lombok.Setter;

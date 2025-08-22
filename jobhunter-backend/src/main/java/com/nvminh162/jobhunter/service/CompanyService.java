@@ -9,8 +9,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.nvminh162.jobhunter.domain.Company;
-import com.nvminh162.jobhunter.domain.dto.Meta;
-import com.nvminh162.jobhunter.domain.dto.ResultPaginationDTO;
+import com.nvminh162.jobhunter.domain.dto.ResResultPaginationDTO;
 import com.nvminh162.jobhunter.repository.CompanyRespository;
 
 @Service
@@ -39,10 +38,10 @@ public class CompanyService {
         return this.companyRespository.findAll(pageable).getContent();
     }
     // Trả về DTO đã format theo frontend yêu cầu
-    public ResultPaginationDTO handleGetAllCompaniesDTOWithPagination(Pageable pageable) {
+    public ResResultPaginationDTO handleGetAllCompaniesDTOWithPagination(Pageable pageable) {
         Page<Company> companyPage = this.companyRespository.findAll(pageable);
-        ResultPaginationDTO resultPaginationDTO = new ResultPaginationDTO();
-        Meta mt = new Meta();
+        ResResultPaginationDTO resultPaginationDTO = new ResResultPaginationDTO();
+        ResResultPaginationDTO.Meta mt = new ResResultPaginationDTO.Meta();
         // Get from frontend send request
         mt.setPage(pageable.getPageNumber() + 1);
         mt.setPageSize(pageable.getPageSize());
@@ -55,10 +54,10 @@ public class CompanyService {
     }
 
     // Trả về DTO đã format theo frontend yêu cầu - Sorting
-    public ResultPaginationDTO handleGetAllCompaniesDTOWithPaginationAndSorting(Specification<Company> specification, Pageable pageable) {
+    public ResResultPaginationDTO handleGetAllCompaniesDTOWithPaginationAndSorting(Specification<Company> specification, Pageable pageable) {
         Page<Company> companyPage = this.companyRespository.findAll(specification, pageable);
-        ResultPaginationDTO resultPaginationDTO = new ResultPaginationDTO();
-        Meta mt = new Meta();
+        ResResultPaginationDTO resultPaginationDTO = new ResResultPaginationDTO();
+        ResResultPaginationDTO.Meta mt = new ResResultPaginationDTO.Meta();
         // Get from frontend send request
         mt.setPage(pageable.getPageNumber() + 1);
         mt.setPageSize(pageable.getPageSize());

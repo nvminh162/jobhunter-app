@@ -1,4 +1,4 @@
-package com.nvminh162.jobhunter.util.enumerate;
+package com.nvminh162.jobhunter.domain.enumerate;
 
 
 public enum GenderEnum {
