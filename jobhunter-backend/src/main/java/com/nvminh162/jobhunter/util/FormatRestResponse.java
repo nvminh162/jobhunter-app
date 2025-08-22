@@ -8,7 +8,7 @@ import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import com.nvminh162.jobhunter.domain.RestResponse;
+import com.nvminh162.jobhunter.domain.dto.RestResponse;
 import com.nvminh162.jobhunter.util.annotation.ApiMessage;
 
 import jakarta.servlet.http.HttpServletResponse;

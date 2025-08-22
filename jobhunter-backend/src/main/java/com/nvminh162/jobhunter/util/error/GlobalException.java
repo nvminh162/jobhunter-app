@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
-import com.nvminh162.jobhunter.domain.RestResponse;
+import com.nvminh162.jobhunter.domain.dto.RestResponse;
 
 /* 
  * Giải thích cơ chế Exception Y - #68 (3p)

@@ -1,4 +1,4 @@
-package com.nvminh162.jobhunter.domain;
+package com.nvminh162.jobhunter.domain.dto;
 
 public class RestResponse<T> {
     private int statusCode;
