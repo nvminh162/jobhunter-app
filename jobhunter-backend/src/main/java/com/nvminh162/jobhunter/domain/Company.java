@@ -3,6 +3,7 @@ package com.nvminh162.jobhunter.domain;
 import java.time.Instant;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nvminh162.jobhunter.util.SecurityUtil;
 
 import jakarta.persistence.Column;
@@ -48,6 +49,8 @@ public class Company {
     private String updatedBy;
 
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    // @ToString.Exclude
+    @JsonIgnore
     private List<User> users;
 
     @PrePersist

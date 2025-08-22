@@ -9,15 +9,19 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.nvminh162.jobhunter.domain.Company;
+import com.nvminh162.jobhunter.domain.User;
 import com.nvminh162.jobhunter.domain.dto.ResResultPaginationDTO;
 import com.nvminh162.jobhunter.repository.CompanyRespository;
+import com.nvminh162.jobhunter.repository.UserRepository;
 
 @Service
 public class CompanyService {
     private final CompanyRespository companyRespository;
+    private final UserRepository userRepository;
 
-    public CompanyService(CompanyRespository companyRespository) {
+    public CompanyService(CompanyRespository companyRespository, UserRepository userRepository) {
         this.companyRespository = companyRespository;
+        this.userRepository = userRepository;
     }
 
     public Company handleCreateCompany(Company company) {
@@ -83,6 +87,14 @@ public class CompanyService {
     }
 
     public void handleDeleteCompany(Long id) {
+        Optional<Company> optionalCompany = this.companyRespository.findById(id);
+        if(optionalCompany.isPresent()) {
+            Company company = optionalCompany.get();
+            // Fetch all user belong to this company
+            List<User> users = this.userRepository.findByCompany(company);
+            this.userRepository.deleteAll(users);
+        }
+
         this.companyRespository.deleteById(id);
     }
 }

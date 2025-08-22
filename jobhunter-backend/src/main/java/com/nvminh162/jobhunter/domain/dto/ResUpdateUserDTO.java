@@ -4,7 +4,9 @@ import java.time.Instant;
 
 import com.nvminh162.jobhunter.domain.enumerate.GenderEnum;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
@@ -16,4 +18,14 @@ public class ResUpdateUserDTO {
     private String address;
     private int age;
     private Instant updatedAt;
+    private ResUserCompanyDTO company;
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class ResUserCompanyDTO {
+        private long id;
+        private String name;
+    }
 }
