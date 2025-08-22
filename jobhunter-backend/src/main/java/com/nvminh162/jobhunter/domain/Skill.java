@@ -6,13 +6,12 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nvminh162.jobhunter.util.SecurityUtil;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -21,40 +20,23 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "companies")
+@Table(name = "skills")
 @Getter
 @Setter
-public class Company {
+public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    @NotBlank(message = "Name không được để trống")
+    @NotBlank(message = "Name không được trống")
     private String name;
 
-    @Column(columnDefinition = "MEDIUMTEXT")
-    private String description;
-
-    private String address;
-
-    private String logo;
-
-    // Format for API return (Chỉ hiển thị phí API còn phía backend vẫn ISO-8601)
-    // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss a", timezone = "GMT+7")
     private Instant createdAt;
-    // Format for API return (Chỉ hiển thị phí API còn phía backend vẫn ISO-8601)
-    // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss a", timezone = "GMT+7")
     private Instant updatedAt;
     private String createdBy;
     private String updatedBy;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    // @ToString.Exclude
-    @JsonIgnore
-    private List<User> users;
-    
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    // @ToString.Exclude
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "skills")
     @JsonIgnore
     private List<Job> jobs;
 
