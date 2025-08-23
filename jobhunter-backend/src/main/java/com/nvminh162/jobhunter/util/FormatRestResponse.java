@@ -1,6 +1,7 @@
 package com.nvminh162.jobhunter.util;
 
 import org.springframework.core.MethodParameter;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -33,9 +34,9 @@ public class FormatRestResponse implements ResponseBodyAdvice<Object> {
         /*
          * *** Fix Bug: ***
          * RestResponse can't be cast to class String
-         * (Nếu là String thì không format)
+         * (Nếu là String || Resource thì không format)
          */
-        if (body instanceof String) {
+        if (body instanceof String || body instanceof Resource) {
             return body;
         }
 
