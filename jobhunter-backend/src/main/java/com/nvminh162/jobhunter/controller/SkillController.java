@@ -3,7 +3,6 @@ package com.nvminh162.jobhunter.controller;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 
 import com.nvminh162.jobhunter.domain.Skill;
 import com.nvminh162.jobhunter.domain.dto.ResResultPaginationDTO;
@@ -17,12 +16,13 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@Controller
+@RestController
 @RequestMapping("/api/${api.version}")
 public class SkillController {
     private SkillService skillService;

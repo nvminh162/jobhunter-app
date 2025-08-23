@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
+        "Configurer",
         "jobhunter",
         "MEDIUMTEXT",
         "nvminh",
@@ -7,5 +8,7 @@
         "springframework",
         "springsecurity",
         "thymeleaf"
-    ]
+    ],
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

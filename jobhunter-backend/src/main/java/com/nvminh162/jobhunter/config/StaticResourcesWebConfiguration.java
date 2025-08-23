@@ -7,12 +7,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class StaticResourcesWebConfiguration implements WebMvcConfigurer {
-    @Value("${nvminh162.upload-file.base-path}")
-    private String basePath;
+    @Value("${nvminh162.upload-file.base-uri}")
+    private String baseUri;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/storage/**")
-                .addResourceLocations(basePath);
+                .addResourceLocations(baseUri);
     }
 }
