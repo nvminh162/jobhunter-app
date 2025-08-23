@@ -202,7 +202,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"nvminh162\",\r\n    \"email\": \"nvminh162231@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"age\": 21,\r\n    \"gender\": \"MALE\",\r\n    \"address\": \"TP.HCM\",\r\n    \"company\": {\r\n        \"id\": 8\r\n    }\r\n}",
+							"raw": "{\r\n    \"name\": \"nvminh162\",\r\n    \"email\": \"nvminh162@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"age\": 21,\r\n    \"gender\": \"MALE\",\r\n    \"address\": \"TP.HCM\",\r\n    \"company\": {\r\n        \"id\": 8\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -811,7 +811,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"Dev JavaScript\",\r\n    \"location\": \"TP HCM\",\r\n    \"salary\": \"10000000\",\r\n    \"quantity\": 10,\r\n    \"level\": \"INTERN\",\r\n    \"description\": \"BLA BLA.........................\",\r\n    \"startDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"endDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"active\": false,\r\n    \"skills\": [\r\n        {\r\n            \"id\": 15\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Dev JavaScript\",\r\n    \"location\": \"TP HCM\",\r\n    \"salary\": \"10000000\",\r\n    \"quantity\": 10,\r\n    \"level\": \"INTERN\",\r\n    \"description\": \"BLA BLA.........................\",\r\n    \"startDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"endDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"active\": false,\r\n    \"skills\": [\r\n        {\r\n            \"id\": 1\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -942,6 +942,311 @@
 								"api",
 								"v1",
 								"jobs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "module file",
+			"item": [
+				{
+					"name": "upload single file",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/F:/personal/2.png"
+								},
+								{
+									"key": "folder",
+									"value": "avatar",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/files",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"files"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "download file",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/files?fileName=1755931664671-2.png&folder=avatar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"files"
+							],
+							"query": [
+								{
+									"key": "fileName",
+									"value": "1755931664671-2.png"
+								},
+								{
+									"key": "folder",
+									"value": "avatar"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "module resume",
+			"item": [
+				{
+					"name": "create cv",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"nvminh1602@gmail.com\",\r\n    \"url\": \"mycv.pdf\",\r\n    \"status\": \"PENDING\",\r\n    \"user\": {\r\n        \"id\": 1\r\n    },\r\n    \"job\": {\r\n        \"id\": 1\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/resumes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"resumes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update cv (status only)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"status\": \"REVIEWING\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/resumes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"resumes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a cv",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"status\": \"REVIEWING\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/resumes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"resumes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get cv ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"status\": \"REVIEWING\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/resumes/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"resumes",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"status\": \"REVIEWING\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/resumes?page=1&size=8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"resumes"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "8"
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
 							]
 						}
 					},

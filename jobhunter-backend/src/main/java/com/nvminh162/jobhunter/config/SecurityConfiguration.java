@@ -43,7 +43,8 @@ public class SecurityConfiguration {
     @Value("${api.version}")
     private String apiVersion;
 
-    /* NOTE
+    /*
+     * NOTE
      * Sử dụng thuật toán BCrypt
      * Ghi đè cấu hình mặc định đối tượng PasswordEncoder
      * => Mã hoá mật khẩu người dùng bằng thuật toán BCrypt =))
@@ -53,7 +54,8 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
-    /* NOTE
+    /*
+     * NOTE
      * Ghi đè cấu hình mặc định đối tượng SecurityFilterChain
      *
      */
@@ -62,22 +64,26 @@ public class SecurityConfiguration {
             HttpSecurity http,
             CustomAuthenticationEntryPoint customAuthenticationEntryPoint // custom here
     ) throws Exception {
+        String[] whiteList = {
+                "/",
+                "/api/" + apiVersion + "/auth/login",
+                "/api/" + apiVersion + "/auth/refresh",
+                "/storage/**",
+                "/api/" + apiVersion + "/companies/**",
+                "/api/" + apiVersion + "/jobs/**"
+        };
+
         http
                 .csrf(c -> c.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         authz -> authz
                                 /* Cho phép vào trang /** từ URL */
-                                .requestMatchers(
-                                    "/",
-                                    "/api/"+apiVersion+"/",
-                                    "/api/"+apiVersion+"/auth/login",
-                                    "/api/"+apiVersion+"/auth/refresh",
-                                    "/storage/**"
-                                ).permitAll()
+                                .requestMatchers(whiteList)
+                                .permitAll()
                                 /* Còn lại bất cứ request nào buộc phải xác thực */
                                 .anyRequest().authenticated()
-                                // .anyRequest().permitAll()
+                // .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(Customizer.withDefaults())
@@ -86,19 +92,22 @@ public class SecurityConfiguration {
                  * Default exception (Config authorization)
                  * Trường hợp này không cần vì đã có customAuthenticationEntryPoint
                  *
-                */
+                 */
                 // .exceptionHandling(
-                //         exceptions -> exceptions
-                //                 .authenticationEntryPoint(customAuthenticationEntryPoint) // 401
-                //                 .accessDeniedHandler(new BearerTokenAccessDeniedHandler())) // 403
-                /* Tắt không dùng form login mặc định của spring  */
+                // exceptions -> exceptions
+                // .authenticationEntryPoint(customAuthenticationEntryPoint) // 401
+                // .accessDeniedHandler(new BearerTokenAccessDeniedHandler())) // 403
+                /* Tắt không dùng form login mặc định của spring */
                 .formLogin(f -> f.disable())
-                /* Enable Session: Default is stateful, nói với spring tôi dùng mô hình stateless */
+                /*
+                 * Enable Session: Default is stateful, nói với spring tôi dùng mô hình
+                 * stateless
+                 */
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
 
-    //khi decode thành công
+    // khi decode thành công
     /*
      * Default spring không chạy qua phần code này
      * Do ta nói với spring đưa token (VD chứa "permission")
@@ -108,7 +117,7 @@ public class SecurityConfiguration {
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
         grantedAuthoritiesConverter.setAuthorityPrefix("");
-        //(nạp "permission" chạy vào hàm convert của spring)
+        // (nạp "permission" chạy vào hàm convert của spring)
         // set Authorities để có thể dùng hasAuthorities()
         grantedAuthoritiesConverter.setAuthoritiesClaimName("permission");
 

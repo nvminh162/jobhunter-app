@@ -1,0 +1,46 @@
+package com.nvminh162.jobhunter.domain.dto;
+
+import java.time.Instant;
+
+import com.nvminh162.jobhunter.domain.enumerate.ResumeStateEnum;
+
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+public class ResFetchResumeDTO {
+    private long id;
+    private String email;
+    private String url;
+
+    @Enumerated(EnumType.STRING)
+    private ResumeStateEnum status;
+
+    private Instant createdAt;
+    private Instant updatedAt;
+    private String createBy;
+    private String updatedBy;
+
+    private UserResume user;
+    private JobResume job;
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    public static class UserResume {
+        private long id;
+        private String name;
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    public static class JobResume {
+        private long id;
+        private String name;
+    }
+}
