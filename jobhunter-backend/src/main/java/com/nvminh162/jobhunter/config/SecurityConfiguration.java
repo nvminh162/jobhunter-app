@@ -72,7 +72,8 @@ public class SecurityConfiguration {
                                     "/",
                                     "/api/"+apiVersion+"/",
                                     "/api/"+apiVersion+"/auth/login",
-                                    "/api/"+apiVersion+"/auth/refresh"
+                                    "/api/"+apiVersion+"/auth/refresh",
+                                    "/storage/**"
                                 ).permitAll()
                                 /* Còn lại bất cứ request nào buộc phải xác thực */
                                 .anyRequest().authenticated()
