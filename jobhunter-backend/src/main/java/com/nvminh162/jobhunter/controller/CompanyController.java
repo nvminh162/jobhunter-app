@@ -6,6 +6,7 @@ import com.nvminh162.jobhunter.domain.Company;
 import com.nvminh162.jobhunter.dto.ResResultPaginationDTO;
 import com.nvminh162.jobhunter.service.CompanyService;
 import com.nvminh162.jobhunter.util.annotation.ApiMessage;
+import com.nvminh162.jobhunter.util.error.IdInvalidException;
 import com.turkraft.springfilter.boot.Filter;
 
 import jakarta.validation.Valid;
@@ -89,7 +90,11 @@ public class CompanyController {
 
     @PutMapping("/companies")
     @ApiMessage("Updated a company")
-    public ResponseEntity<Company> updateCompany(@Valid @RequestBody Company reqCompany) {
+    public ResponseEntity<Company> updateCompany(@Valid @RequestBody Company reqCompany) throws IdInvalidException {
+        Company company = this.companyService.handleGetCompanyById(reqCompany.getId());
+        if(company == null) {
+            throw new IdInvalidException("Company not found");
+        }
         Company updatedCompany = this.companyService.handleUpdateCompany(reqCompany);
         return ResponseEntity.ok(updatedCompany);
     }

@@ -73,19 +73,34 @@ public class JobService {
         return dto;
     }
 
-    public ResUpdateJobDTO handleUpdateJob(Job job) {
+    public ResUpdateJobDTO handleUpdateJob(Job reqJob) {
+        // Get existing job from database to preserve createdAt and createdBy
+        Job currentJob = this.handleGetJobById(reqJob.getId());
+        
+        // Update only the modifiable fields
+        currentJob.setName(reqJob.getName());
+        currentJob.setLocation(reqJob.getLocation());
+        currentJob.setSalary(reqJob.getSalary());
+        currentJob.setQuantity(reqJob.getQuantity());
+        currentJob.setLevel(reqJob.getLevel());
+        currentJob.setDescription(reqJob.getDescription());
+        currentJob.setStartDate(reqJob.getStartDate());
+        currentJob.setEndDate(reqJob.getEndDate());
+        currentJob.setActive(reqJob.isActive());
+        currentJob.setCompany(reqJob.getCompany());
+        
         // check skills
-        if (job.getSkills() != null) {
-            List<Long> reqSkills = job.getSkills()
+        if (reqJob.getSkills() != null) {
+            List<Long> reqSkills = reqJob.getSkills()
                     .stream().map(x -> x.getId())
                     .collect(Collectors.toList());
 
             List<Skill> dbSkills = this.skillRepository.findByIdIn(reqSkills);
-            job.setSkills(dbSkills);
+            currentJob.setSkills(dbSkills);
         }
 
-        // create job
-        Job currentJob = this.jobRepository.save(job);
+        // update job (this will trigger @PreUpdate which sets updatedAt and updatedBy)
+        currentJob = this.jobRepository.save(currentJob);
 
         // convert response
         ResUpdateJobDTO dto = new ResUpdateJobDTO();

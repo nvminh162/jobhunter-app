@@ -24,6 +24,14 @@ public class CompanyService {
         this.userRepository = userRepository;
     }
 
+    public Company handleGetCompanyById(long id) {
+        Optional<Company> optional = this.companyRespository.findById(id);
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+        return null;
+    }
+
     public Company handleCreateCompany(Company company) {
         return this.companyRespository.save(company);
     }
