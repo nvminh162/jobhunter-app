@@ -6,6 +6,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -69,8 +70,6 @@ public class SecurityConfiguration {
                 "/api/" + apiVersion + "/auth/login",
                 "/api/" + apiVersion + "/auth/refresh",
                 "/api/" + apiVersion + "/auth/register",
-                "/api/" + apiVersion + "/companies/**",
-                "/api/" + apiVersion + "/jobs/**",
                 "/storage/**"
         };
 
@@ -81,6 +80,9 @@ public class SecurityConfiguration {
                         authz -> authz
                                 /* Cho phép vào trang /** từ URL */
                                 .requestMatchers(whiteList).permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/" + apiVersion + "/companies").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/" + apiVersion + "/jobs").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/" + apiVersion + "/skills").permitAll()
                                 /* Còn lại bất cứ request nào buộc phải xác thực */
                                 .anyRequest().authenticated()
                              // .anyRequest().permitAll()

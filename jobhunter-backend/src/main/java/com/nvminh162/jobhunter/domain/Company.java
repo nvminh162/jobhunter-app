@@ -52,7 +52,7 @@ public class Company {
     // @ToString.Exclude
     @JsonIgnore
     private List<User> users;
-    
+
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
     // @ToString.Exclude
     @JsonIgnore
