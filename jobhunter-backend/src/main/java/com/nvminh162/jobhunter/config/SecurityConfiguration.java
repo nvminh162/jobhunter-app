@@ -68,9 +68,10 @@ public class SecurityConfiguration {
                 "/",
                 "/api/" + apiVersion + "/auth/login",
                 "/api/" + apiVersion + "/auth/refresh",
-                "/storage/**",
+                "/api/" + apiVersion + "/auth/register",
                 "/api/" + apiVersion + "/companies/**",
-                "/api/" + apiVersion + "/jobs/**"
+                "/api/" + apiVersion + "/jobs/**",
+                "/storage/**"
         };
 
         http
@@ -82,7 +83,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(whiteList).permitAll()
                                 /* Còn lại bất cứ request nào buộc phải xác thực */
                                 .anyRequest().authenticated()
-                // .anyRequest().permitAll()
+                             // .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(Customizer.withDefaults())

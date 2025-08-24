@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nvminh162.jobhunter.domain.Job;
 import com.nvminh162.jobhunter.domain.Role;
 import com.nvminh162.jobhunter.dto.ResResultPaginationDTO;
 import com.nvminh162.jobhunter.service.RoleService;
@@ -70,5 +71,15 @@ public class RoleController {
     public ResponseEntity<ResResultPaginationDTO> getPermissions(
             @Filter Specification<Role> spec, Pageable pageable) {
         return ResponseEntity.ok(this.roleService.getRoles(spec, pageable));
+    }
+
+    @GetMapping("/roles/{id}")
+    @ApiMessage("Get role by id")
+    public ResponseEntity<Role> getRole(@PathVariable("id") long id) throws IdInvalidException {
+        Role role = this.roleService.fetchById(id);
+        if(role == null) {
+            throw new IdInvalidException("Role ID " + id + " not found");
+        }
+        return ResponseEntity.ok().body(role);
     }
 }
