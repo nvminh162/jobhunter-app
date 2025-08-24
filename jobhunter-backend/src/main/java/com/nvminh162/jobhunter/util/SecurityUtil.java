@@ -45,7 +45,12 @@ public class SecurityUtil {
         this.jwtEncoder = jwtEncoder;
     }
 
-    public String createAccessToken(String email, ResLoginDTO.UserLogin dto) {
+    public String createAccessToken(String email, ResLoginDTO dto) {
+        ResLoginDTO.UserInsideToken userInsideToken = new ResLoginDTO.UserInsideToken();
+        userInsideToken.setId(dto.getUser().getId());
+        userInsideToken.setEmail(dto.getUser().getEmail());
+        userInsideToken.setName(dto.getUser().getName());
+
         // Lấy thời gian hiện tại
         Instant now = Instant.now();
         // Công thêm mốc thời gian quy định
@@ -62,7 +67,7 @@ public class SecurityUtil {
             .issuedAt(now)
             .expiresAt(validity)
             .subject(email)
-            .claim("user", dto)
+            .claim("user", userInsideToken)
             .claim("permission", listAuthority)
             .build();
 
@@ -72,6 +77,11 @@ public class SecurityUtil {
     }
 
     public String createRefreshToken(String email, ResLoginDTO dto) {
+        ResLoginDTO.UserInsideToken userInsideToken = new ResLoginDTO.UserInsideToken();
+        userInsideToken.setId(dto.getUser().getId());
+        userInsideToken.setEmail(dto.getUser().getEmail());
+        userInsideToken.setName(dto.getUser().getName());
+
         // Lấy thời gian hiện tại
         Instant now = Instant.now();
         // Công thêm mốc thời gian quy định
@@ -85,7 +95,7 @@ public class SecurityUtil {
             .subject(email)
             // claim chỉ thành phần mô tả subject trên lưu là gì cũng đc,
             // đối với refresh token lưu thông tin là user, thì dùng user
-            .claim("user", dto.getUser()) // your claim name (your name)
+            .claim("user", userInsideToken) // your claim name (your name)
             .build();
 
         JwsHeader jwsHeader = JwsHeader.with(JWT_ALGORITHM).build();

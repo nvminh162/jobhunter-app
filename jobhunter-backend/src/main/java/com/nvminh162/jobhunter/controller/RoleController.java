@@ -48,10 +48,7 @@ public class RoleController {
         if (this.roleService.fetchById(role.getId()) == null) {
             throw new IdInvalidException("Role ID: " + role.getId() + " không tồn tại");
         }
-        // check name?
-        if (this.roleService.existByName(role.getName())) {
-            throw new IdInvalidException("Role name: " + role.getName() + " đã tồn tại");
-        }
+
         // update permission
         return ResponseEntity.ok().body(this.roleService.update(role));
     }

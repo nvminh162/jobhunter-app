@@ -60,15 +60,19 @@ public class AuthController {
         User currentUserDB = this.userService.handleGetUserByUsername(loginDTO.getUsername());
 
         if (currentUserDB != null) {
-            ResLoginDTO.UserLogin userLogin = new ResLoginDTO.UserLogin(currentUserDB.getId(), currentUserDB.getEmail(),
-                    currentUserDB.getName());
+            ResLoginDTO.UserLogin userLogin = new ResLoginDTO.UserLogin(
+                currentUserDB.getId(),
+                currentUserDB.getEmail(),
+                currentUserDB.getName(),
+                currentUserDB.getRole()
+            );
             resLoginDTO.setUser(userLogin);
         }
 
         // ********************************************************
         // Có thể tách logic này riêng để tái sử dụng
         // create a token (authentication.getName() => lấy ra email từ authentication)
-        String accessToken = this.securityUtil.createAccessToken(authentication.getName(), resLoginDTO.getUser());
+        String accessToken = this.securityUtil.createAccessToken(authentication.getName(), resLoginDTO);
         resLoginDTO.setAccessToken(accessToken);
 
         // create refresh token
@@ -112,6 +116,8 @@ public class AuthController {
             userLogin.setId(currentUserDB.getId());
             userLogin.setEmail(currentUserDB.getEmail());
             userLogin.setName(currentUserDB.getName());
+            userLogin.setRole(currentUserDB.getRole());
+
             userGetAccount.setUser(userLogin);
         }
         return ResponseEntity.ok().body(userGetAccount);
@@ -145,15 +151,19 @@ public class AuthController {
         User currentUserDB = this.userService.handleGetUserByUsername(email);
 
         if (currentUserDB != null) {
-            ResLoginDTO.UserLogin userLogin = new ResLoginDTO.UserLogin(currentUserDB.getId(), currentUserDB.getEmail(),
-                    currentUserDB.getName());
+            ResLoginDTO.UserLogin userLogin = new ResLoginDTO.UserLogin(
+                currentUserDB.getId(),
+                currentUserDB.getEmail(),
+                currentUserDB.getName(),
+                currentUserDB.getRole()
+            );
             resLoginDTO.setUser(userLogin);
         }
 
         // ********************************************************
         // Có thể tách logic này riêng để tái sử dụng
         // create a token
-        String accessToken = this.securityUtil.createAccessToken(email, resLoginDTO.getUser());
+        String accessToken = this.securityUtil.createAccessToken(email, resLoginDTO);
         resLoginDTO.setAccessToken(accessToken);
 
         // create refresh token

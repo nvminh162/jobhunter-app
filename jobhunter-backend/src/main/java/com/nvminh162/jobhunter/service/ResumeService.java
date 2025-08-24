@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -19,9 +20,20 @@ import com.nvminh162.jobhunter.dto.resume.ResUpdateResumeDTO;
 import com.nvminh162.jobhunter.repository.JobRepository;
 import com.nvminh162.jobhunter.repository.ResumeRepository;
 import com.nvminh162.jobhunter.repository.UserRepository;
+import com.nvminh162.jobhunter.util.SecurityUtil;
+import com.turkraft.springfilter.converter.FilterSpecification;
+import com.turkraft.springfilter.converter.FilterSpecificationConverter;
+import com.turkraft.springfilter.parser.FilterParser;
+import com.turkraft.springfilter.parser.node.FilterNode;
 
 @Service
 public class ResumeService {
+    @Autowired
+    private FilterParser filterParser;
+
+    @Autowired
+    private FilterSpecificationConverter filterSpecificationConverter;
+
     private ResumeRepository resumeRepository;
     private UserRepository userRepository;
     private JobRepository jobRepository;
@@ -114,10 +126,39 @@ public class ResumeService {
 
         // remove senstive data
         List<ResFetchResumeDTO> listResume = page.getContent()
-            .stream().map(item -> this.getResume(item))
-            .collect(Collectors.toList());
+                .stream().map(item -> this.getResume(item))
+                .collect(Collectors.toList());
 
         resultPaginationDTO.setResult(listResume);
         return resultPaginationDTO;
+    }
+
+    // Tự Build query thay vì dùng @Filter <để hiểu bản chất>
+    public ResResultPaginationDTO fetchResumeByUser(Pageable pageable) {
+        // query builder
+        String email = SecurityUtil.getCurrentUserLogin().isPresent() == true
+            ? SecurityUtil.getCurrentUserLogin().get()
+            : null;
+        FilterNode node = filterParser.parse("email='"+email+"'");
+        FilterSpecification<Resume> specification = filterSpecificationConverter.convert(node);
+        Page<Resume> page = this.resumeRepository.findAll(specification, pageable);
+
+        ResResultPaginationDTO res = new ResResultPaginationDTO();
+        ResResultPaginationDTO.Meta mt = new ResResultPaginationDTO.Meta();
+        // Get from frontend send request
+        mt.setPage(pageable.getPageNumber() + 1);
+        mt.setPageSize(pageable.getPageSize());
+        // Get from dbs
+        mt.setPages(page.getTotalPages());
+        mt.setTotal(page.getTotalElements());
+        res.setMeta(mt);
+
+        // remove senstive data
+        List<ResFetchResumeDTO> listResume = page.getContent()
+                .stream().map(item -> this.getResume(item))
+                .collect(Collectors.toList());
+
+        res.setResult(listResume);
+        return res;
     }
 }
