@@ -341,7 +341,7 @@
 							"raw": "{\r\n    \"name\": \"nvminh162\",\r\n    \"email\": \"nvminh162@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"age\": 21,\r\n    \"gender\": \"MALE\",\r\n    \"address\": \"TP.HCM\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/users/3",
+							"raw": "http://localhost:8080/api/v1/users/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -351,7 +351,7 @@
 								"api",
 								"v1",
 								"users",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -374,7 +374,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 21,\r\n    \"name\": \"nvminh162245\",\r\n    \"gender\": \"MALE\",\r\n    \"age\": 22,\r\n    \"address\": \"Go Vap, TP.HCM\",\r\n    \"company\": {\r\n        \"id\": 5\r\n    }\r\n}\r\n",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"nvminh162\",\r\n    \"gender\": \"MALE\",\r\n    \"age\": 22,\r\n    \"address\": \"An Nhon, TP.HCM\",\r\n    \"company\": {\r\n        \"id\": 5\r\n    }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -419,7 +419,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Minh Company\",\r\n    \"description\": \"Production company\",\r\n    \"address\": \"TP.HCM\",\r\n    \"logo\": \"nvminh.png\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Minh Company\",\r\n    \"description\": \"Production SE company\",\r\n    \"address\": \"TP.HCM\",\r\n    \"logo\": \"company.png\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -443,7 +443,7 @@
 					"response": []
 				},
 				{
-					"name": "get companies",
+					"name": "get all companies",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -470,7 +470,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/companies?page=1&size=3&sort=description,asc",
+							"raw": "http://localhost:8080/api/v1/companies?page=1&size=2&sort=description,asc",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -488,7 +488,7 @@
 								},
 								{
 									"key": "size",
-									"value": "3"
+									"value": "2"
 								},
 								{
 									"key": "sort",
@@ -521,7 +521,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 5,\r\n    \"name\": \"Minh Company\",\r\n    \"description\": \"Production company\",\r\n    \"address\": \"TP.HCM\",\r\n    \"logo\": \"nvminh.png\"\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Minh Update\",\r\n    \"description\": \"Production company\",\r\n    \"address\": \"TP.HCM\",\r\n    \"logo\": \"nvminh.png\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -545,7 +545,7 @@
 					"response": []
 				},
 				{
-					"name": "delete a company",
+					"name": "delete by id",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -561,10 +561,10 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 3,\r\n    \"name\": \"Minh Company\",\r\n    \"description\": \"Software Seller\",\r\n    \"address\": \"TP HCM\",\r\n    \"logo\": \"nvminh162.png\"\r\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/companies/5",
+							"raw": "http://localhost:8080/api/v1/companies/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -574,7 +574,46 @@
 								"api",
 								"v1",
 								"companies",
-								"5"
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"Dev JavaScript Update\",\r\n    \"location\": \"TP HCM Update\",\r\n    \"salary\": 10000000,\r\n    \"quantity\": 10,\r\n    \"level\": \"FRESHER\",\r\n    \"description\": \"BLA BLA. update\",\r\n    \"startDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"endDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"active\": false,\r\n    \"skills\": [\r\n        {\r\n            \"id\": 1\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/companies/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"companies",
+								"1"
 							]
 						}
 					},
@@ -583,7 +622,7 @@
 			]
 		},
 		{
-			"name": "module job",
+			"name": "module job & skill",
 			"item": [
 				{
 					"name": "skill",
@@ -605,7 +644,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Spring boot\"\r\n}\r\n",
+									"raw": "{\r\n    \"name\": \"Ruby\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -645,7 +684,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": 11,\r\n    \"name\": \"Angular\"\r\n}\r\n",
+									"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"Angular\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -736,7 +775,7 @@
 									"raw": "{\r\n    \"id\": 10,\r\n    \"name\": \"nvminh\"\r\n}\r\n"
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/skills/14",
+									"raw": "http://localhost:8080/api/v1/skills/3",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -746,7 +785,7 @@
 										"api",
 										"v1",
 										"skills",
-										"14"
+										"3"
 									]
 								}
 							},
@@ -755,197 +794,212 @@
 					]
 				},
 				{
-					"name": "create a job",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
-									"type": "string"
+					"name": "job",
+					"item": [
+						{
+							"name": "create a job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Dev Java\",\r\n    \"location\": \"TP HCM\",\r\n    \"salary\": 10000000,\r\n    \"quantity\": 10,\r\n    \"level\": \"JUNIOR\",\r\n    \"description\": \"BLA BLA\",\r\n    \"startDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"endDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"active\": true,\r\n    \"skills\": [\r\n        {\r\n            \"id\": 1\r\n        },\r\n        {\r\n            \"id\": 2\r\n        },\r\n        {\r\n            \"id\": 3\r\n        }\r\n    ],\r\n    \"company\": {\r\n        \"id\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/jobs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"jobs"
+									]
 								}
-							]
+							},
+							"response": []
 						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Dev Java\",\r\n  \"location\": \"TP HCM\",\r\n  \"salary\": \"10000000\",\r\n  \"quantity\": 10,\r\n  \"level\": \"JUNIOR\",\r\n  \"description\": \"BLA BLA\",\r\n  \"startDate\": \"2024-05-04T13:55:58.454607Z\",\r\n  \"endDate\": \"2024-05-04T13:55:58.454607Z\",\r\n  \"active\": true,\r\n  \"skills\": [\r\n    {\r\n      \"id\": 12\r\n    },\r\n    {\r\n      \"id\": 14\r\n    },\r\n    {\r\n      \"id\": 19\r\n    }\r\n  ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "update a job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"Dev JavaScript Update\",\r\n    \"location\": \"TP HCM Update\",\r\n    \"salary\": 10000000,\r\n    \"quantity\": 10,\r\n    \"level\": \"FRESHER\",\r\n    \"description\": \"BLA BLA. update\",\r\n    \"startDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"endDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"active\": false,\r\n    \"skills\": [\r\n        {\r\n            \"id\": 1\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/jobs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"jobs"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:8080/api/v1/jobs",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"jobs"
-							]
+						{
+							"name": "get a job",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Dev JavaScript\",\r\n    \"location\": \"TP HCM\",\r\n    \"salary\": \"10000000\",\r\n    \"quantity\": 10,\r\n    \"level\": \"INTERN\",\r\n    \"description\": \"BLA BLA.........................\",\r\n    \"startDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"endDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"active\": false,\r\n    \"skills\": [\r\n        {\r\n            \"id\": 15\r\n        }\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/jobs/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"jobs",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete a job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Dev JavaScript\",\r\n    \"location\": \"TP HCM\",\r\n    \"salary\": \"10000000\",\r\n    \"quantity\": 10,\r\n    \"level\": \"INTERN\",\r\n    \"description\": \"BLA BLA.........................\",\r\n    \"startDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"endDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"active\": false,\r\n    \"skills\": [\r\n        {\r\n            \"id\": 15\r\n        }\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/jobs/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"jobs",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all jobs",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1MTgwMTgsImlhdCI6MTc1NTg3ODAxOCwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.ToBi_Li0OBnm2GTNYxm0ccrCv_O_N74Wn7XbC70Go-KFzzCl6fOS74gJ7X3lCAY3LsOl6cY0mcKIGaZC_jr0bw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 10,\r\n    \"name\": \"nvminh\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/jobs?page=1&size=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"jobs"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "update a job",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Dev JavaScript\",\r\n    \"location\": \"TP HCM\",\r\n    \"salary\": \"10000000\",\r\n    \"quantity\": 10,\r\n    \"level\": \"INTERN\",\r\n    \"description\": \"BLA BLA.........................\",\r\n    \"startDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"endDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"active\": false,\r\n    \"skills\": [\r\n        {\r\n            \"id\": 1\r\n        }\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/v1/jobs",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"jobs"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get a job",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Dev JavaScript\",\r\n    \"location\": \"TP HCM\",\r\n    \"salary\": \"10000000\",\r\n    \"quantity\": 10,\r\n    \"level\": \"INTERN\",\r\n    \"description\": \"BLA BLA.........................\",\r\n    \"startDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"endDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"active\": false,\r\n    \"skills\": [\r\n        {\r\n            \"id\": 15\r\n        }\r\n    ]\r\n}"
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/v1/jobs/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"jobs",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete a job",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Dev JavaScript\",\r\n    \"location\": \"TP HCM\",\r\n    \"salary\": \"10000000\",\r\n    \"quantity\": 10,\r\n    \"level\": \"INTERN\",\r\n    \"description\": \"BLA BLA.........................\",\r\n    \"startDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"endDate\": \"2024-05-04T13:55:58.454607Z\",\r\n    \"active\": false,\r\n    \"skills\": [\r\n        {\r\n            \"id\": 15\r\n        }\r\n    ]\r\n}"
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/v1/jobs/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"jobs",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get job with paginate",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1MTgwMTgsImlhdCI6MTc1NTg3ODAxOCwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.ToBi_Li0OBnm2GTNYxm0ccrCv_O_N74Wn7XbC70Go-KFzzCl6fOS74gJ7X3lCAY3LsOl6cY0mcKIGaZC_jr0bw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 10,\r\n    \"name\": \"nvminh\"\r\n}\r\n"
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/v1/jobs",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"jobs"
-							]
-						}
-					},
-					"response": []
+					]
 				}
 			]
 		},
@@ -973,7 +1027,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/F:/personal/2.png"
+									"src": []
 								},
 								{
 									"key": "folder",
@@ -1014,7 +1068,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/files?fileName=1755931664671-2.png&folder=avatar",
+							"raw": "http://localhost:8080/api/v1/files?fileName=1756012746575-1.png&folder=avatar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1028,7 +1082,7 @@
 							"query": [
 								{
 									"key": "fileName",
-									"value": "1755931664671-2.png"
+									"value": "1756012746575-1.png"
 								},
 								{
 									"key": "folder",
@@ -1061,7 +1115,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\" : \"nvminh1602@gmail.com\",\r\n    \"url\": \"mycv.pdf\",\r\n    \"status\": \"PENDING\",\r\n    \"user\": {\r\n        \"id\": 1\r\n    },\r\n    \"job\": {\r\n        \"id\": 1\r\n    }\r\n}\r\n",
+							"raw": "{\r\n    \"email\" : \"nvminh1602@gmail.com\",\r\n    \"url\": \"mycv.pdf\",\r\n    \"status\": \"PENDING\",\r\n    \"user\": {\r\n        \"id\": 1\r\n    },\r\n    \"job\": {\r\n        \"id\": 2\r\n    }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1183,7 +1237,7 @@
 							"raw": "{\r\n    \"id\": 1,\r\n    \"status\": \"REVIEWING\"\r\n}\r\n"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/resumes/2",
+							"raw": "http://localhost:8080/api/v1/resumes/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1193,7 +1247,7 @@
 								"api",
 								"v1",
 								"resumes",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -1251,6 +1305,341 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "module permission & role",
+			"item": [
+				{
+					"name": "permission",
+					"item": [
+						{
+							"name": "create a permission",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibnZtaW5oMTYyIjp7InByaW5jaXBhbCI6eyJwYXNzd29yZCI6bnVsbCwidXNlcm5hbWUiOiJudm1pbmgxNjJAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImFjY291bnROb25FeHBpcmVkIjp0cnVlLCJhY2NvdW50Tm9uTG9ja2VkIjp0cnVlLCJjcmVkZW50aWFsc05vbkV4cGlyZWQiOnRydWUsImVuYWJsZWQiOnRydWV9LCJjcmVkZW50aWFscyI6bnVsbCwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImRldGFpbHMiOm51bGwsImF1dGhlbnRpY2F0ZWQiOnRydWV9LCJleHAiOjE3NjQyNjg2MzcsImlhdCI6MTc1NTYyODYzN30.Svc-FNh-asrpBDjz9m8CFQuWd9Qj1htt_JkWfRtZo5AQG4bFscEn_HkaoLWUsyt3lHQC1pB8Vv4yBe_lWuC5qQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"create a user\",\r\n    \"apiPath\": \"/users\",\r\n    \"method\": \"POST\",\r\n    \"module\": \"USERS\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/permissions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"permissions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update a permission",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibnZtaW5oMTYyIjp7InByaW5jaXBhbCI6eyJwYXNzd29yZCI6bnVsbCwidXNlcm5hbWUiOiJudm1pbmgxNjJAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImFjY291bnROb25FeHBpcmVkIjp0cnVlLCJhY2NvdW50Tm9uTG9ja2VkIjp0cnVlLCJjcmVkZW50aWFsc05vbkV4cGlyZWQiOnRydWUsImVuYWJsZWQiOnRydWV9LCJjcmVkZW50aWFscyI6bnVsbCwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImRldGFpbHMiOm51bGwsImF1dGhlbnRpY2F0ZWQiOnRydWV9LCJleHAiOjE3NjQyNjg2MzcsImlhdCI6MTc1NTYyODYzN30.Svc-FNh-asrpBDjz9m8CFQuWd9Qj1htt_JkWfRtZo5AQG4bFscEn_HkaoLWUsyt3lHQC1pB8Vv4yBe_lWuC5qQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"update a user\",\r\n    \"apiPath\": \"/users\",\r\n    \"method\": \"PUT\",\r\n    \"module\": \"USERS\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/permissions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"permissions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all permissions",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibnZtaW5oMTYyIjp7InByaW5jaXBhbCI6eyJwYXNzd29yZCI6bnVsbCwidXNlcm5hbWUiOiJudm1pbmgxNjJAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImFjY291bnROb25FeHBpcmVkIjp0cnVlLCJhY2NvdW50Tm9uTG9ja2VkIjp0cnVlLCJjcmVkZW50aWFsc05vbkV4cGlyZWQiOnRydWUsImVuYWJsZWQiOnRydWV9LCJjcmVkZW50aWFscyI6bnVsbCwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImRldGFpbHMiOm51bGwsImF1dGhlbnRpY2F0ZWQiOnRydWV9LCJleHAiOjE3NjQyNjg2MzcsImlhdCI6MTc1NTYyODYzN30.Svc-FNh-asrpBDjz9m8CFQuWd9Qj1htt_JkWfRtZo5AQG4bFscEn_HkaoLWUsyt3lHQC1pB8Vv4yBe_lWuC5qQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"update a user\",\r\n    \"apiPath\": \"/users\",\r\n    \"method\": \"PUT\",\r\n    \"module\": \"USERS\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/permissions?page=1&size=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"permissions"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete a permission",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/permissions/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"permissions",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "role",
+					"item": [
+						{
+							"name": "create a role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibnZtaW5oMTYyIjp7InByaW5jaXBhbCI6eyJwYXNzd29yZCI6bnVsbCwidXNlcm5hbWUiOiJudm1pbmgxNjJAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImFjY291bnROb25FeHBpcmVkIjp0cnVlLCJhY2NvdW50Tm9uTG9ja2VkIjp0cnVlLCJjcmVkZW50aWFsc05vbkV4cGlyZWQiOnRydWUsImVuYWJsZWQiOnRydWV9LCJjcmVkZW50aWFscyI6bnVsbCwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImRldGFpbHMiOm51bGwsImF1dGhlbnRpY2F0ZWQiOnRydWV9LCJleHAiOjE3NjQyNjg2MzcsImlhdCI6MTc1NTYyODYzN30.Svc-FNh-asrpBDjz9m8CFQuWd9Qj1htt_JkWfRtZo5AQG4bFscEn_HkaoLWUsyt3lHQC1pB8Vv4yBe_lWuC5qQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"user\",\r\n    \"description\": \"vai trò của user\",\r\n    \"active\": true,\r\n    \"permissions\": [\r\n        {\"id\": 1},\r\n        {\"id\": 2}\r\n    ]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/roles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update a role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibnZtaW5oMTYyIjp7InByaW5jaXBhbCI6eyJwYXNzd29yZCI6bnVsbCwidXNlcm5hbWUiOiJudm1pbmgxNjJAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImFjY291bnROb25FeHBpcmVkIjp0cnVlLCJhY2NvdW50Tm9uTG9ja2VkIjp0cnVlLCJjcmVkZW50aWFsc05vbkV4cGlyZWQiOnRydWUsImVuYWJsZWQiOnRydWV9LCJjcmVkZW50aWFscyI6bnVsbCwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImRldGFpbHMiOm51bGwsImF1dGhlbnRpY2F0ZWQiOnRydWV9LCJleHAiOjE3NjQyNjg2MzcsImlhdCI6MTc1NTYyODYzN30.Svc-FNh-asrpBDjz9m8CFQuWd9Qj1htt_JkWfRtZo5AQG4bFscEn_HkaoLWUsyt3lHQC1pB8Vv4yBe_lWuC5qQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 3,\r\n    \"name\": \"guest\",\r\n    \"description\": \"vai trò của guest\",\r\n    \"active\": true,\r\n    \"permissions\": [\r\n        {\"id\": 1},\r\n        {\"id\": 2}\r\n    ]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/roles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all role",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibnZtaW5oMTYyIjp7InByaW5jaXBhbCI6eyJwYXNzd29yZCI6bnVsbCwidXNlcm5hbWUiOiJudm1pbmgxNjJAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImFjY291bnROb25FeHBpcmVkIjp0cnVlLCJhY2NvdW50Tm9uTG9ja2VkIjp0cnVlLCJjcmVkZW50aWFsc05vbkV4cGlyZWQiOnRydWUsImVuYWJsZWQiOnRydWV9LCJjcmVkZW50aWFscyI6bnVsbCwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImRldGFpbHMiOm51bGwsImF1dGhlbnRpY2F0ZWQiOnRydWV9LCJleHAiOjE3NjQyNjg2MzcsImlhdCI6MTc1NTYyODYzN30.Svc-FNh-asrpBDjz9m8CFQuWd9Qj1htt_JkWfRtZo5AQG4bFscEn_HkaoLWUsyt3lHQC1pB8Vv4yBe_lWuC5qQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"update a user\",\r\n    \"apiPath\": \"/users\",\r\n    \"method\": \"PUT\",\r\n    \"module\": \"USERS\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/roles?page=1&size=3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"roles"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete a role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/roles/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"roles",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
