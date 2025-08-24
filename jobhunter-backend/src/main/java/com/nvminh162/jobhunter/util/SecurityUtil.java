@@ -24,7 +24,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.stereotype.Service;
 
 import com.nimbusds.jose.util.Base64;
-import com.nvminh162.jobhunter.domain.dto.ResLoginDTO;
+import com.nvminh162.jobhunter.dto.auth.ResLoginDTO;
 
 @Service
 public class SecurityUtil {

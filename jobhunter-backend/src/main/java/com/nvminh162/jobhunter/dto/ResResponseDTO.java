@@ -1,6 +1,6 @@
-package com.nvminh162.jobhunter.domain.dto;
+package com.nvminh162.jobhunter.dto;
 
-public class RestResponse<T> {
+public class ResResponseDTO<T> {
     private int statusCode;
     private String error;
     private Object message; // message có thể là String or ArrayList

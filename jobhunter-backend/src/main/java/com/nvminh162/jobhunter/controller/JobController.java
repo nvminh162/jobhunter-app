@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nvminh162.jobhunter.domain.Job;
-import com.nvminh162.jobhunter.domain.dto.ResCreateJobDTO;
-import com.nvminh162.jobhunter.domain.dto.ResResultPaginationDTO;
-import com.nvminh162.jobhunter.domain.dto.ResUpdateJobDTO;
+import com.nvminh162.jobhunter.dto.ResResultPaginationDTO;
+import com.nvminh162.jobhunter.dto.job.ResCreateJobDTO;
+import com.nvminh162.jobhunter.dto.job.ResUpdateJobDTO;
 import com.nvminh162.jobhunter.service.JobService;
 import com.nvminh162.jobhunter.util.annotation.ApiMessage;
 import com.nvminh162.jobhunter.util.error.IdInvalidException;

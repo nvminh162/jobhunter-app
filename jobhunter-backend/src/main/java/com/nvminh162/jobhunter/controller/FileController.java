@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.nvminh162.jobhunter.domain.dto.ResUploadFileDTO;
+import com.nvminh162.jobhunter.dto.file.ResUploadFileDTO;
 import com.nvminh162.jobhunter.service.FileService;
 import com.nvminh162.jobhunter.util.annotation.ApiMessage;
 import com.nvminh162.jobhunter.util.error.StorageException;

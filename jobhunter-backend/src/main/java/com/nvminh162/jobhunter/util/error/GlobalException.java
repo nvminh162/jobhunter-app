@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
-import com.nvminh162.jobhunter.domain.dto.RestResponse;
+import com.nvminh162.jobhunter.dto.ResResponseDTO;
 
 /* 
  * Giải thích cơ chế Exception Y - #68 (3p)
@@ -27,8 +27,8 @@ public class GlobalException {
             BadCredentialsException.class,
             IdInvalidException.class
     })
-    public ResponseEntity<RestResponse<Object>> handleIdException(Exception ex) {
-        RestResponse<Object> res = new RestResponse<Object>();
+    public ResponseEntity<ResResponseDTO<Object>> handleIdException(Exception ex) {
+        ResResponseDTO<Object> res = new ResResponseDTO<Object>();
         res.setStatusCode(HttpStatus.BAD_REQUEST.value());
         res.setError(ex.getMessage());
         res.setMessage("Exception occurs...");
@@ -39,8 +39,8 @@ public class GlobalException {
     @ExceptionHandler(value = {
             NoResourceFoundException.class
     })
-    public ResponseEntity<RestResponse<Object>> handleNotFoundException(Exception ex) {
-        RestResponse<Object> res = new RestResponse<Object>();
+    public ResponseEntity<ResResponseDTO<Object>> handleNotFoundException(Exception ex) {
+        ResResponseDTO<Object> res = new ResResponseDTO<Object>();
         res.setStatusCode(HttpStatus.BAD_REQUEST.value());
         res.setError(ex.getMessage());
         res.setMessage("404 Not found. URL may not exist...");
@@ -49,11 +49,11 @@ public class GlobalException {
 
     // Exception for validation
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<RestResponse<Object>> validationError(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ResResponseDTO<Object>> validationError(MethodArgumentNotValidException ex) {
         BindingResult result = ex.getBindingResult();
         final List<FieldError> fieldErrors = result.getFieldErrors();
 
-        RestResponse<Object> res = new RestResponse<Object>();
+        ResResponseDTO<Object> res = new ResResponseDTO<Object>();
         res.setStatusCode(HttpStatus.BAD_REQUEST.value());
         res.setError(ex.getBody().getDetail());
 
@@ -66,8 +66,8 @@ public class GlobalException {
     @ExceptionHandler(value = {
             StorageException.class
     })
-    public ResponseEntity<RestResponse<Object>> handleFileUploadException(Exception ex) {
-        RestResponse<Object> res = new RestResponse<Object>();
+    public ResponseEntity<ResResponseDTO<Object>> handleFileUploadException(Exception ex) {
+        ResResponseDTO<Object> res = new ResResponseDTO<Object>();
         res.setStatusCode(HttpStatus.BAD_REQUEST.value());
         res.setError(ex.getMessage());
         res.setMessage("Exception upload file...");

@@ -5,7 +5,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 
 import com.nvminh162.jobhunter.domain.Skill;
-import com.nvminh162.jobhunter.domain.dto.ResResultPaginationDTO;
+import com.nvminh162.jobhunter.dto.ResResultPaginationDTO;
 import com.nvminh162.jobhunter.service.SkillService;
 import com.nvminh162.jobhunter.util.annotation.ApiMessage;
 import com.nvminh162.jobhunter.util.error.IdInvalidException;

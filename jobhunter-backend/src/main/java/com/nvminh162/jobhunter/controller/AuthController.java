@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nvminh162.jobhunter.domain.User;
-import com.nvminh162.jobhunter.domain.dto.ReqLoginDTO;
-import com.nvminh162.jobhunter.domain.dto.ResLoginDTO;
+import com.nvminh162.jobhunter.dto.auth.ReqLoginDTO;
+import com.nvminh162.jobhunter.dto.auth.ResLoginDTO;
 import com.nvminh162.jobhunter.service.UserService;
 import com.nvminh162.jobhunter.util.SecurityUtil;
 import com.nvminh162.jobhunter.util.annotation.ApiMessage;

@@ -1,4 +1,4 @@
-package com.nvminh162.jobhunter.domain.dto;
+package com.nvminh162.jobhunter.dto.file;
 
 import java.time.Instant;
 

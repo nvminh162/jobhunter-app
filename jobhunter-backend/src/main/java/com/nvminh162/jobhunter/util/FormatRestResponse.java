@@ -9,7 +9,7 @@ import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import com.nvminh162.jobhunter.domain.dto.RestResponse;
+import com.nvminh162.jobhunter.dto.ResResponseDTO;
 import com.nvminh162.jobhunter.util.annotation.ApiMessage;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,7 +28,7 @@ public class FormatRestResponse implements ResponseBodyAdvice<Object> {
         HttpServletResponse httpServletResponse = ((ServletServerHttpResponse) response).getServletResponse();
         int status = httpServletResponse.getStatus();
 
-        RestResponse<Object> res = new RestResponse<Object>();
+        ResResponseDTO<Object> res = new ResResponseDTO<Object>();
         res.setStatusCode(status);
 
         /*

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 
 import com.nvminh162.jobhunter.domain.Skill;
-import com.nvminh162.jobhunter.domain.dto.ResResultPaginationDTO;
+import com.nvminh162.jobhunter.dto.ResResultPaginationDTO;
 import com.nvminh162.jobhunter.repository.SkillRepository;
 
 @Service

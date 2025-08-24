@@ -3,7 +3,7 @@ package com.nvminh162.jobhunter.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nvminh162.jobhunter.domain.Company;
-import com.nvminh162.jobhunter.domain.dto.ResResultPaginationDTO;
+import com.nvminh162.jobhunter.dto.ResResultPaginationDTO;
 import com.nvminh162.jobhunter.service.CompanyService;
 import com.nvminh162.jobhunter.util.annotation.ApiMessage;
 import com.turkraft.springfilter.boot.Filter;
@@ -32,7 +32,7 @@ public class CompanyController {
     }
 
     @PostMapping("/companies") // <?> = any
-    @ApiMessage("Create a new company")
+    @ApiMessage("Created a new company")
     public ResponseEntity<?> createCompany(@Valid @RequestBody Company reqCompany) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.companyService.handleCreateCompany(reqCompany));
     }
@@ -88,14 +88,14 @@ public class CompanyController {
     }
 
     @PutMapping("/companies")
-    @ApiMessage("Update a company")
+    @ApiMessage("Updated a company")
     public ResponseEntity<Company> updateCompany(@Valid @RequestBody Company reqCompany) {
         Company updatedCompany = this.companyService.handleUpdateCompany(reqCompany);
         return ResponseEntity.ok(updatedCompany);
     }
 
     @DeleteMapping("/companies/{id}")
-    @ApiMessage("Delete a new company")
+    @ApiMessage("Deleted a company")
     public ResponseEntity<Void> deleteCompany(@PathVariable("id") Long id) {
         this.companyService.handleDeleteCompany(id);
         return ResponseEntity.ok(null);

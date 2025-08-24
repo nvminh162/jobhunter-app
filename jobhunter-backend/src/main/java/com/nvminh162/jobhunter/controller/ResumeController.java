@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nvminh162.jobhunter.domain.Resume;
-import com.nvminh162.jobhunter.domain.dto.ResCreateResumeDTO;
-import com.nvminh162.jobhunter.domain.dto.ResFetchResumeDTO;
-import com.nvminh162.jobhunter.domain.dto.ResResultPaginationDTO;
-import com.nvminh162.jobhunter.domain.dto.ResUpdateResumeDTO;
+import com.nvminh162.jobhunter.dto.ResResultPaginationDTO;
+import com.nvminh162.jobhunter.dto.resume.ResCreateResumeDTO;
+import com.nvminh162.jobhunter.dto.resume.ResFetchResumeDTO;
+import com.nvminh162.jobhunter.dto.resume.ResUpdateResumeDTO;
 import com.nvminh162.jobhunter.service.ResumeService;
 import com.nvminh162.jobhunter.util.annotation.ApiMessage;
 import com.nvminh162.jobhunter.util.error.IdInvalidException;

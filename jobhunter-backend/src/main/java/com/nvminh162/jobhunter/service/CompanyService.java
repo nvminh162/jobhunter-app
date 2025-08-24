@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.nvminh162.jobhunter.domain.Company;
 import com.nvminh162.jobhunter.domain.User;
-import com.nvminh162.jobhunter.domain.dto.ResResultPaginationDTO;
+import com.nvminh162.jobhunter.dto.ResResultPaginationDTO;
 import com.nvminh162.jobhunter.repository.CompanyRespository;
 import com.nvminh162.jobhunter.repository.UserRepository;
 
