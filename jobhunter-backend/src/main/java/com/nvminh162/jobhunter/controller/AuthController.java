@@ -54,6 +54,7 @@ public class AuthController {
     }
 
     @PostMapping("/auth/login")
+    @ApiMessage("Login success")
     public ResponseEntity<ResLoginDTO> login(@Valid @RequestBody ReqLoginDTO loginDTO) { // add @Valid to validate <add dependencies/>
         // Nap input gồm username/password vào Security
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(

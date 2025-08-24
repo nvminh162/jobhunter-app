@@ -1,0 +1,11 @@
+SET FOREIGN_KEY_CHECKS = 0;
+drop table if exists companies;
+drop table if exists jobs;
+drop table if exists job_skill;
+drop table if exists permission_role;
+drop table if exists permissions;
+drop table if exists resumes;
+drop table if exists roles;
+drop table if exists skills;
+drop table if exists users;
+SET FOREIGN_KEY_CHECKS = 1;
