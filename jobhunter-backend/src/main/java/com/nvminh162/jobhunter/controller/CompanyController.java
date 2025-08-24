@@ -32,6 +32,7 @@ public class CompanyController {
         this.companyService = companyService;
     }
 
+    // cách không tối ưu dùng "?"
     @PostMapping("/companies") // <?> = any
     @ApiMessage("Created a new company")
     public ResponseEntity<?> createCompany(@Valid @RequestBody Company reqCompany) {

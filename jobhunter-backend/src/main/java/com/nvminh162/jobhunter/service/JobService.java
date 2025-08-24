@@ -9,11 +9,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.nvminh162.jobhunter.domain.Company;
 import com.nvminh162.jobhunter.domain.Job;
 import com.nvminh162.jobhunter.domain.Skill;
 import com.nvminh162.jobhunter.dto.ResResultPaginationDTO;
 import com.nvminh162.jobhunter.dto.job.ResCreateJobDTO;
 import com.nvminh162.jobhunter.dto.job.ResUpdateJobDTO;
+import com.nvminh162.jobhunter.repository.CompanyRespository;
 import com.nvminh162.jobhunter.repository.JobRepository;
 import com.nvminh162.jobhunter.repository.SkillRepository;
 
@@ -21,10 +23,12 @@ import com.nvminh162.jobhunter.repository.SkillRepository;
 public class JobService {
     private JobRepository jobRepository;
     private SkillRepository skillRepository;
+    private CompanyRespository companyRespository;
 
-    public JobService(JobRepository jobRepository, SkillRepository skillRepository) {
+    public JobService(JobRepository jobRepository, SkillRepository skillRepository, CompanyRespository companyRespository) {
         this.jobRepository = jobRepository;
         this.skillRepository = skillRepository;
+        this.companyRespository = companyRespository;
     }
 
     public Job handleGetJobById(long id) {
@@ -76,7 +80,7 @@ public class JobService {
     public ResUpdateJobDTO handleUpdateJob(Job reqJob) {
         // Get existing job from database to preserve createdAt and createdBy
         Job currentJob = this.handleGetJobById(reqJob.getId());
-        
+
         // Update only the modifiable fields
         currentJob.setName(reqJob.getName());
         currentJob.setLocation(reqJob.getLocation());
@@ -88,7 +92,7 @@ public class JobService {
         currentJob.setEndDate(reqJob.getEndDate());
         currentJob.setActive(reqJob.isActive());
         currentJob.setCompany(reqJob.getCompany());
-        
+
         // check skills
         if (reqJob.getSkills() != null) {
             List<Long> reqSkills = reqJob.getSkills()
@@ -97,6 +101,14 @@ public class JobService {
 
             List<Skill> dbSkills = this.skillRepository.findByIdIn(reqSkills);
             currentJob.setSkills(dbSkills);
+        }
+
+        // check company
+        if(reqJob.getCompany() != null) {
+            Optional<Company> opCompany = this.companyRespository.findById(reqJob.getCompany().getId());
+            if(opCompany.isPresent()) {
+                currentJob.setCompany(opCompany.get());
+            }
         }
 
         // update job (this will trigger @PreUpdate which sets updatedAt and updatedBy)
