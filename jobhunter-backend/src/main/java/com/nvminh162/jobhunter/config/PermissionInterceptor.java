@@ -12,7 +12,7 @@ import com.nvminh162.jobhunter.domain.Role;
 import com.nvminh162.jobhunter.domain.User;
 import com.nvminh162.jobhunter.service.UserService;
 import com.nvminh162.jobhunter.util.SecurityUtil;
-import com.nvminh162.jobhunter.util.error.IdInvalidException;
+import com.nvminh162.jobhunter.util.error.PermissionException;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -39,11 +39,20 @@ import jakarta.servlet.http.HttpServletResponse;
 // B3 Config spring to run
 
 // B4 Bug
-/*
+// Giải thích cơ chế @Transactional
+/* #1: @Transactional
  * fix org.hibernate.LazyInitializationException - could not initialize proxy - no Session
  * Do dùng cơ chế FetchType.LAZY
- * @Transactional nói với spring: hãy chờ thao tác vào database rồi kết thúc session
+ * Chưa có session (Để có 1 session do java spring tự động tạo và quản lý) chưa vào tới Controller
+ * @Transactional nói với spring: tạo 1 phiên đăng nhập vào dbs khi kết thúc thì xoá session đó đi
  */
+
+ /* #2: @Transactional
+  * (Quan tâm đến số lượng ng dùng lớn)
+  * Nếu có 2 lời gọi request, Mỗi lời gọi request nó sẽ là block
+  * Sau khi request thứ I xong sẽ cập nhật data cho request thứ 2 (theo thứ tự)
+  * Trường hợp thất bại có thể rollback lại
+  */
 
 public class PermissionInterceptor implements HandlerInterceptor {
 
@@ -73,16 +82,16 @@ public class PermissionInterceptor implements HandlerInterceptor {
             if (user != null) {
                 Role role = user.getRole();
                 if (role != null) {
-                    List<Permission> permissions = role.getPermissions();
+                    List<Permission> permissions = role.getPermissions(); // error if haven't session => fix: @Transactional create session
                     boolean isAllow = permissions
                             .stream()
                             .anyMatch(
                                     item -> item.getApiPath().equals(path) && item.getMethod().equals(httpMethod));
                     if (isAllow == false) {
-                        throw new IdInvalidException("Bạn có quyền truy cập endpoint này!");
+                        throw new PermissionException("Bạn có quyền truy cập endpoint này!");
                     }
                 } else {
-                    throw new IdInvalidException("Bạn có quyền truy cập endpoint này!");
+                    throw new PermissionException("Bạn có quyền truy cập endpoint này!");
                 }
             }
         }
