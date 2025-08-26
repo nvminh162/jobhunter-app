@@ -2,6 +2,7 @@ package com.nvminh162.jobhunter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 // Tắt Spring Security
 /* @SpringBootApplication(exclude = {
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
     org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class
 }) */
 @SpringBootApplication
+@EnableAsync // bật tính năng async
 public class JobhunterBackendApplication {
 
     public static void main(String[] args) {

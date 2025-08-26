@@ -5,15 +5,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nvminh162.jobhunter.service.EmailService;
+import com.nvminh162.jobhunter.service.SubscriberService;
 import com.nvminh162.jobhunter.util.annotation.ApiMessage;
 
 @RestController
 @RequestMapping("/api/${api.version}")
 public class EmailController {
     private final EmailService emailService;
+    private final SubscriberService subscriberService;
 
-    public EmailController(EmailService emailService) {
+    public EmailController(EmailService emailService, SubscriberService subscriberService) {
         this.emailService = emailService;
+        this.subscriberService = subscriberService;
     }
 
     @GetMapping("/send-simple-email")
@@ -27,20 +30,18 @@ public class EmailController {
     @ApiMessage("Send Email Sync")
     public String sendEmailSync() {
         emailService.sendEmailSync(
-            "nvminh162@gmail.com",
-            "Test send email",
-            "<h1><b>Hello</b></h1>",
-            false,
-            true
-        );
+                "nvminh162@gmail.com",
+                "Test send email",
+                "<h1><b>Hello</b></h1>",
+                false,
+                true);
         return "OK";
     }
 
-    @GetMapping("/send-email-from-template-sync")
+    @GetMapping("/email")
     @ApiMessage("Send Email Sync")
     public String sendEmailFromTemplateSync() {
-        emailService.sendEmailFromTemplateSync(
-            "nvminh162@gmail.com", "Test send email with template", "jobs"); //test in src\main\resources\templates\test.html
+        this.subscriberService.sendSubscribersEmailJobs();
         return "OK";
     }
 }
