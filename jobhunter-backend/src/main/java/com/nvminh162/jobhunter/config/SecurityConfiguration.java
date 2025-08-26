@@ -25,7 +25,7 @@ import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.util.Base64;
 import com.nvminh162.jobhunter.util.SecurityUtil;
 
-/* 
+/*
  * Docs:
  * https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html
  */
@@ -133,6 +133,7 @@ public class SecurityConfiguration {
         return new NimbusJwtEncoder(new ImmutableSecret<>(getSecretKey()));
     }
 
+    // Nhờ có hàm này Nó sẽ lưu data vào Spring security! (Security Context)
     @Bean
     public JwtDecoder jwtDecoder() {
         NimbusJwtDecoder jwtDecoder = NimbusJwtDecoder.withSecretKey(
