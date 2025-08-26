@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"nvminh162@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"username\": \"test@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -802,7 +802,7 @@
 									"raw": "{\r\n    \"id\": 10,\r\n    \"name\": \"nvminh\"\r\n}\r\n"
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/skills/3",
+									"raw": "http://localhost:8080/api/v1/skills/12",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -812,7 +812,7 @@
 										"api",
 										"v1",
 										"skills",
-										"3"
+										"12"
 									]
 								}
 							},
@@ -1252,7 +1252,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsInBlcm1pc3Npb24iOlsiUk9MRV9VU0VSX0NSRUFURSIsIlJPTEVfVVNFUl9VUERBVEUiXSwiZXhwIjoxNzY0ODQxNzA5LCJpYXQiOjE3NTYyMDE3MDksInVzZXIiOnsiaWQiOjIsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJuYW1lIjoidGVzdCJ9fQ.fquxFtwiJKM2HkctzvdHgvy1tvGFpywVygt01sXwDiJudIK9P7BcC_slfXk0-TGPXA7PRNQTgRmm_-Esahw0ow",
 									"type": "string"
 								}
 							]
@@ -1303,7 +1303,7 @@
 							"raw": "{\r\n    \"id\": 1,\r\n    \"status\": \"REVIEWING\"\r\n}\r\n"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/resumes?page=1&size=8",
+							"raw": "http://localhost:8080/api/v1/resumes?page=1&size=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1321,11 +1321,11 @@
 								},
 								{
 									"key": "size",
-									"value": "8"
+									"value": "1"
 								},
 								{
 									"key": "",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -1341,7 +1341,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibnZtaW5oMTYyIjp7InByaW5jaXBhbCI6eyJwYXNzd29yZCI6bnVsbCwidXNlcm5hbWUiOiJudm1pbmgxNjJAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImFjY291bnROb25FeHBpcmVkIjp0cnVlLCJhY2NvdW50Tm9uTG9ja2VkIjp0cnVlLCJjcmVkZW50aWFsc05vbkV4cGlyZWQiOnRydWUsImVuYWJsZWQiOnRydWV9LCJjcmVkZW50aWFscyI6bnVsbCwiYXV0aG9yaXRpZXMiOlt7InJvbGUiOiJST0xFX1VTRVIifV0sImRldGFpbHMiOm51bGwsImF1dGhlbnRpY2F0ZWQiOnRydWV9LCJleHAiOjE3NjQyNjg2MzcsImlhdCI6MTc1NTYyODYzN30.Svc-FNh-asrpBDjz9m8CFQuWd9Qj1htt_JkWfRtZo5AQG4bFscEn_HkaoLWUsyt3lHQC1pB8Vv4yBe_lWuC5qQ",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsInBlcm1pc3Npb24iOlsiUk9MRV9VU0VSX0NSRUFURSIsIlJPTEVfVVNFUl9VUERBVEUiXSwiZXhwIjoxNzY0ODMzMjk4LCJpYXQiOjE3NTYxOTMyOTgsInVzZXIiOnsiaWQiOjIsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJuYW1lIjoidGVzdCJ9fQ.iEnaGcjBRu3B5j6o1T1xDsU5RQkzcVF7w6H5v1ofcufltik3w68bFqxMhcLysIPLmMrxqurg7jrRMlJfAPalfA",
 									"type": "string"
 								}
 							]
@@ -1742,6 +1742,81 @@
 							"response": []
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "module subscriber",
+			"item": [
+				{
+					"name": "create a sub",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJudm1pbmgxNjJAZ21haWwuY29tIiwicGVybWlzc2lvbiI6WyJST0xFX1VTRVJfQ1JFQVRFIiwiUk9MRV9VU0VSX1VQREFURSJdLCJleHAiOjE3NjQ1NTQwNjIsImlhdCI6MTc1NTkxNDA2MiwidXNlciI6eyJpZCI6MiwiZW1haWwiOiJudm1pbmgxNjJAZ21haWwuY29tIiwibmFtZSI6Im52bWluaDE2MiJ9fQ.gD_OCIPx7EI__sOtR-D1gNeyRm3AkB_5DGeQEHJAcdrQOKt9loHZ0lPVqUDwSGuBacEqBx9aDmZf-lWtW7u5WA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"name\": \"Admin\",\r\n    \"skills\": [\r\n        {\"id\": 1 },  {\"id\": 2 }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/subscribers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"subscribers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update a sub",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"skills\": [\r\n        {\"id\": 1 },  {\"id\": 3 }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/subscribers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"subscribers"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
