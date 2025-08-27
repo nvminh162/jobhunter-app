@@ -80,7 +80,6 @@ public class SubscriberService {
         return res;
     }
 
-
     public void sendSubscribersEmailJobs() {
         List<Subscriber> listSubs = this.subscriberRepository.findAll();
         if (listSubs != null && listSubs.size() > 0) {
@@ -90,6 +89,7 @@ public class SubscriberService {
                     List<Job> listJobs = this.jobRepository.findBySkillsIn(listSkills);
                     if (listJobs != null && listJobs.size() > 0) {
 
+                        /* Fix bug thymeleaf exceptions TemplateInputException */
                         List<ResEmailJob> arr = listJobs.stream().map(job -> this.convertJobToSendEmail(job))
                                 .collect(Collectors.toList());
 
@@ -98,6 +98,7 @@ public class SubscriberService {
                                 "Cơ hội việc làm hot đang chờ đón bạn, khám phá ngay",
                                 "jobs",
                                 sub.getName(),
+                                // listJobs); // Giải thích ở file SubscriberService
                                 arr);
                     }
                 }

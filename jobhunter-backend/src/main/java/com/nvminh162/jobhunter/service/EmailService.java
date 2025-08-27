@@ -60,6 +60,18 @@ public class EmailService {
         context.setVariable("name", username);
         context.setVariable("jobs", value);
 
+        // Nếu dùng @Async quá trình convert file html sang String lỗi ở đây do cơ chế của Java!
+        // main thread khi dùng @Async sẽ xử lý song song đa luồng việc chia sẻ data giữa các Threads gặp khó khăn
+        // => (context.setVariable("jobs", value);)
+
+        // khiến file template không có data chia
+        // How to fix?
+        /*
+         * Khi dùng template engine, ta hãy đưa cho nó data, và nó chỉ chịu trách nhiệm convert HTML -> String
+         * Không ép nó lấy data: 'listJobs fix thành arr ở EmailService'
+         * Ở biến Job ta phải lấy full data chứ không phải mất thời gian query xuống => FIX
+         * Tạo ResEmailJob
+         */
         String content = this.templateEngine.process(templateName, context);
         this.sendEmailSync(to, subject, content, false, true);
     }
