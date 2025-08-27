@@ -3,6 +3,7 @@ package com.nvminh162.jobhunter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 // Tắt Spring Security
 /* @SpringBootApplication(exclude = {
@@ -11,6 +12,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 }) */
 @SpringBootApplication
 @EnableAsync // bật tính năng async
+@EnableScheduling // enable cron job
 public class JobhunterBackendApplication {
 
     public static void main(String[] args) {
