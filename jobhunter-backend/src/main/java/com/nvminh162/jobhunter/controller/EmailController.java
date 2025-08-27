@@ -40,6 +40,8 @@ public class EmailController {
 
     @GetMapping("/email")
     @ApiMessage("Send Email Sync")
+    // @Transactional // tạo session vì hành động scheduled là tự động
+    // @Scheduled(cron = "*/30 * * * * *") // 60s chạy 1 lần
     public String sendEmailFromTemplateSync() {
         this.subscriberService.sendSubscribersEmailJobs();
         return "OK";
