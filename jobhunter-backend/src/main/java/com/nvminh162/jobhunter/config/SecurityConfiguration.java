@@ -71,7 +71,10 @@ public class SecurityConfiguration {
                 "/api/" + apiVersion + "/auth/refresh",
                 "/api/" + apiVersion + "/auth/register",
                 "/api/" + apiVersion + "/email/**",
-                "/storage/**"
+                "/storage/**",
+                "/v3/api-docs/**",
+                "/swagger-ui/**",
+                "/swagger-ui.html"
         };
 
         http
@@ -86,7 +89,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.GET, "/api/" + apiVersion + "/skills/**").permitAll()
                                 /* Còn lại bất cứ request nào buộc phải xác thực */
                                 .anyRequest().authenticated()
-                             // .anyRequest().permitAll()
+                // .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(Customizer.withDefaults())
