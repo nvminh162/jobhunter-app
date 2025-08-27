@@ -21,6 +21,16 @@ import com.nvminh162.jobhunter.dto.ResResponseDTO;
  */
 @RestControllerAdvice // (@ControllerAdvice + @ResponseBody)
 public class GlobalException {
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ResResponseDTO<Object>> handleAllException(Exception ex) {
+        ResResponseDTO<Object> res = new ResResponseDTO<Object>();
+        res.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        res.setMessage(ex.getMessage());
+        res.setError("Internal Server Error");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
+    }
+
+
     // Exception define
     @ExceptionHandler(value = {
             UsernameNotFoundException.class,
