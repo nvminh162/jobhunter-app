@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nvminh162.jobhunter.domain.Subscriber;
 import com.nvminh162.jobhunter.service.SubscriberService;
+import com.nvminh162.jobhunter.util.SecurityUtil;
 import com.nvminh162.jobhunter.util.annotation.ApiMessage;
 import com.nvminh162.jobhunter.util.error.IdInvalidException;
 
@@ -28,7 +29,7 @@ public class SubscriberController {
     @ApiMessage("Create a new subscriber")
     public ResponseEntity<Subscriber> create(@Valid @RequestBody Subscriber subscriber) throws IdInvalidException {
         boolean isExist = this.subscriberService.isExistEmail(subscriber.getEmail());
-        if(isExist) {
+        if (isExist) {
             throw new IdInvalidException("Email " + subscriber.getEmail() + " đã tồn tại");
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(this.subscriberService.create(subscriber));
@@ -38,11 +39,18 @@ public class SubscriberController {
     @ApiMessage("Update a subscriber")
     public ResponseEntity<Subscriber> update(@Valid @RequestBody Subscriber reqSub) throws IdInvalidException {
         Subscriber subDB = this.subscriberService.findById(reqSub.getId());
-        if(subDB == null) {
+        if (subDB == null) {
             throw new IdInvalidException("ID " + reqSub.getId() + " không tồn tại");
         }
         return ResponseEntity.status(HttpStatus.OK).body(this.subscriberService.update(subDB, reqSub));
     }
 
-
+    @PostMapping("/subscribers/skills")
+    @ApiMessage("Get subscriber's skill")
+    public ResponseEntity<Subscriber> getSubscribersSkill() throws IdInvalidException {
+        String email = SecurityUtil.getCurrentUserLogin().isPresent() == true
+                ? SecurityUtil.getCurrentUserLogin().get()
+                : "";
+        return ResponseEntity.ok().body(this.subscriberService.findByEmail(email));
+    }
 }

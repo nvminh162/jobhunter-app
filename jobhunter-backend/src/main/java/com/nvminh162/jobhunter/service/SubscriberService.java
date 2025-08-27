@@ -106,6 +106,10 @@ public class SubscriberService {
         }
     }
 
+    public Subscriber findByEmail(String email) {
+        return this.subscriberRepository.findByEmail(email);
+    }
+
     // 10s in 1 lần
     // @Scheduled(cron = "*/10 * * * * *")
     // public void testCron() {

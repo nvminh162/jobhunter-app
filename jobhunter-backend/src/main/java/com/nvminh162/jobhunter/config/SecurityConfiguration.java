@@ -81,9 +81,9 @@ public class SecurityConfiguration {
                         authz -> authz
                                 /* Cho phép vào trang /** từ URL */
                                 .requestMatchers(whiteList).permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/" + apiVersion + "/companies").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/" + apiVersion + "/jobs").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/" + apiVersion + "/skills").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/" + apiVersion + "/companies/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/" + apiVersion + "/jobs/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/" + apiVersion + "/skills/**").permitAll()
                                 /* Còn lại bất cứ request nào buộc phải xác thực */
                                 .anyRequest().authenticated()
                              // .anyRequest().permitAll()

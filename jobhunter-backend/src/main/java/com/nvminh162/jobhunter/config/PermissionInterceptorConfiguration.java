@@ -28,7 +28,7 @@ public class PermissionInterceptorConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // Không check interceptor
+        // Không check interceptor, không check quyền với các endpoint này
         String[] whiteList = {
                 "/",
                 "/storage/**",
@@ -36,6 +36,8 @@ public class PermissionInterceptorConfiguration implements WebMvcConfigurer {
                 "/api/" + apiVersion + "/companies/**",
                 "/api/" + apiVersion + "/jobs/**",
                 "/api/" + apiVersion + "/skills/**",
+                "/api/" + apiVersion + "/subscribers/**",
+                "/api/" + apiVersion + "/resumes/**",
                 "/api/" + apiVersion + "/files"
         };
         registry.addInterceptor(getPermissionInterceptor())
