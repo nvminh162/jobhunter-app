@@ -1,6 +1,6 @@
 {
   "name": "jobhunter-frontend",
-  "author": "@nvminh162",
+  "author": "nvminh162",
   "description": "Frontend",
   "private": true,
   "version": "1.0.0",
@@ -9,6 +9,7 @@
     "dev": "vite",
     "start": "vite",
     "build": "tsc && vite build",
+    "build-uat": "tsc && vite build --mode uat",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -48,8 +49,5 @@
     "sass": "1.62.1",
     "typescript": "5.3.3",
     "vite": "4.2.0"
-  },
-  "overrides": {
-    "dayjs": "1.11.8"
   }
 }
